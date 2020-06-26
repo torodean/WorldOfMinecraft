@@ -9,7 +9,7 @@ public class DeepholmMicroCaveBlock extends Block {
 
     public DeepholmMicroCaveBlock() {
         super(Block.Properties.create(Material.ROCK)
-                .hardnessAndResistance(4.0f, 5.0f)
+                .hardnessAndResistance(1.5f, 6.0f)
                 .sound(SoundType.STONE)
                 .harvestLevel(1)
                 .harvestTool(ToolType.PICKAXE)

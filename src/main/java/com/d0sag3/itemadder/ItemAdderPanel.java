@@ -7,59 +7,82 @@
 
 package com.d0sag3.itemadder;
 
+import javax.imageio.ImageIO;
+import javax.swing.*;
+import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+
 /**
  * This class is for the GUI form that ItemAdder uses.
- * Much of the code was auto-generated using the Netbeans design form then modified further.
+ * The code was modeled after auto-generated code using the Netbeans design form.
  */
-public class ItemAdderGUI extends javax.swing.JPanel {
+public class ItemAdderPanel extends JPanel {
+
+    // The mod directory is the directory that the root directory that the mod files can be found.
+    public static String modDirectory = "C:\\Users\\d0sag3\\Desktop\\WarcraftItems";
+
+    // The used directory is the directory that the already added textures get moved to.
+    public static String usedDirectory = "C:\\Users\\d0sag3\\Desktop\\WarcraftItems\\textures_converted";
+
+    // The unused directory is the directory that the textures to be added can be found.
+    public static String unusedDirectory = "C:\\Users\\d0sag3\\Desktop\\WarcraftItems\\textures_unconverted";
+
+    // The skipped directory is the directory that the textures that were skipped are moved to.
+    public static String skippedDirectory = "C:\\Users\\d0sag3\\Desktop\\WarcraftItems\\textures_skipped";
 
     // Creates new form Panel to house the gui.
-    public ItemAdderGUI() {
+    public ItemAdderPanel() {
         initComponents();
         this.setVisible(true);
     }
 
     @SuppressWarnings("unchecked")
     private void initComponents() {
+        testCount = 0;
 
-        mainPanel = new javax.swing.JPanel();
+        // Image items.
+        imagePanel = new JPanel();
+        imageIcon = new ImageIcon();
+        imageIconLabel = new JLabel();
 
-        modDirectory_textField = new javax.swing.JTextField();
-        jLabel1 = new javax.swing.JLabel();
-        unusedDirectory_textField = new javax.swing.JTextField();
-        jLabel2 = new javax.swing.JLabel();
-        usedDirectory_textField = new javax.swing.JTextField();
-        jLabel3 = new javax.swing.JLabel();
-        skippedDirectory_textField = new javax.swing.JTextField();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        generateCode_button = new javax.swing.JButton();
-        skip_button = new javax.swing.JButton();
-        jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
-        jLabel10 = new javax.swing.JLabel();
-        jLabel11 = new javax.swing.JLabel();
-        jLabel12 = new javax.swing.JLabel();
-        hardness_textField = new javax.swing.JTextField();
-        resistance_textField = new javax.swing.JTextField();
-        resistance_slider = new javax.swing.JSlider();
-        hardness_slider = new javax.swing.JSlider();
-        material_ComboBox = new javax.swing.JComboBox<>();
-        sound_ComboBox = new javax.swing.JComboBox<>();
-        harvestLevel_slider = new javax.swing.JSlider();
-        harvestTool_ComboBox = new javax.swing.JComboBox<>();
+        modDirectory_textField = new JTextField();
+        jLabel1 = new JLabel();
+        unusedDirectory_textField = new JTextField();
+        jLabel2 = new JLabel();
+        usedDirectory_textField = new JTextField();
+        jLabel3 = new JLabel();
+        skippedDirectory_textField = new JTextField();
+        jLabel4 = new JLabel();
+        jLabel5 = new JLabel();
+        generateCode_button = new JButton();
+        skip_button = new JButton();
+        jLabel6 = new JLabel();
+        jLabel7 = new JLabel();
+        jLabel8 = new JLabel();
+        jLabel9 = new JLabel();
+        jLabel10 = new JLabel();
+        jLabel11 = new JLabel();
+        jLabel12 = new JLabel();
+        hardness_textField = new JTextField();
+        resistance_textField = new JTextField();
+        resistance_slider = new JSlider();
+        hardness_slider = new JSlider();
+        material_ComboBox = new JComboBox<>();
+        sound_ComboBox = new JComboBox<>();
+        harvestLevel_slider = new JSlider();
+        harvestTool_ComboBox = new JComboBox<>();
 
 
-        harvestLevel_textField = new javax.swing.JTextField();
+        harvestLevel_textField = new JTextField();
         harvestLevel_textField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 harvestLevel_textFieldActionPerformed(evt);
             }
         });
 
-        modDirectory_textField.setText("Dir");
+        modDirectory_textField.setText(modDirectory);
         modDirectory_textField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 modDirectory_textFieldActionPerformed(evt);
@@ -68,20 +91,27 @@ public class ItemAdderGUI extends javax.swing.JPanel {
 
         jLabel1.setText("Mod Directory:");
 
-        mainPanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        imagePanel.setBorder(BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        imagePanel.setPreferredSize(new java.awt.Dimension(256, 256));
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(mainPanel);
-        mainPanel.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-                jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 276, Short.MAX_VALUE)
-        );
-        jPanel1Layout.setVerticalGroup(
-                jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 278, Short.MAX_VALUE)
-        );
+        imageIconLabel.setToolTipText("Test Text");
+        imagePanel.setSize(256,256);
+        imageIconLabel.setSize(256,256);
+        imagePanel.add(imageIconLabel);
 
-        unusedDirectory_textField.setText("Dir");
+        GroupLayout imagePanelLayout = new GroupLayout(imagePanel);
+        imagePanel.setLayout(imagePanelLayout);
+        imagePanelLayout.setHorizontalGroup(
+                imagePanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                        .addComponent(imageIconLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 256, Short.MAX_VALUE)
+        );
+        imagePanelLayout.setVerticalGroup(
+                imagePanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                        .addComponent(imageIconLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 256, Short.MAX_VALUE)
+        );
+        imagePanel.setVisible(true);
+        this.add(imagePanel);
+        unusedDirectory_textField.setText(unusedDirectory);
         unusedDirectory_textField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 unusedDirectory_textFieldActionPerformed(evt);
@@ -90,7 +120,7 @@ public class ItemAdderGUI extends javax.swing.JPanel {
 
         jLabel2.setText("Unused Textures:");
 
-        usedDirectory_textField.setText("Dir");
+        usedDirectory_textField.setText(usedDirectory);
         usedDirectory_textField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 usedDirectory_textFieldActionPerformed(evt);
@@ -99,7 +129,7 @@ public class ItemAdderGUI extends javax.swing.JPanel {
 
         jLabel3.setText("Used Textures:");
 
-        skippedDirectory_textField.setText("Dir");
+        skippedDirectory_textField.setText(skippedDirectory);
         skippedDirectory_textField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 skippedDirectory_textFieldActionPerformed(evt);
@@ -111,6 +141,15 @@ public class ItemAdderGUI extends javax.swing.JPanel {
         jLabel5.setText("Currently Parsed Texture:");
 
         generateCode_button.setText("Generate Code");
+        generateCode_button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                try {
+                    generateCode_buttonActionPerformed(evt);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
 
         skip_button.setText("Skip");
 
@@ -152,9 +191,9 @@ public class ItemAdderGUI extends javax.swing.JPanel {
         hardness_slider.setToolTipText("");
         hardness_slider.setValue(15);
 
-        material_ComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{"AIR", "STRUCTURE_VOID", "PORTAL", "CARPET", "PLANTS", "OCEAN_PLANT", "TALL_PLANTS", "SEA_GRASS", "WATER", "BUBBLE_COLUMN", "LAVA", "SNOW", "FIRE", "MISCELLANEOUS", "WEB", "REDSTONE_LIGHT", "CLAY", "EARTH", "ORGANIC", "PACKED_ICE", "SAND", "SPONGE", "SHULKER", "WOOD", "BAMBOO_SAPLING", "BAMBOO", "WOOL", "TNT", "LEAVES", "GLASS", "ICE", "CACTUS", "ROCK", "IRON", "SNOW_BLOCK", "ANVIL", "BARRIER", "PISTON", "CORAL", "GOURD", "DRAGON_EGG", "CAKE"}));
+        material_ComboBox.setModel(new DefaultComboBoxModel<>(new String[]{"AIR", "STRUCTURE_VOID", "PORTAL", "CARPET", "PLANTS", "OCEAN_PLANT", "TALL_PLANTS", "SEA_GRASS", "WATER", "BUBBLE_COLUMN", "LAVA", "SNOW", "FIRE", "MISCELLANEOUS", "WEB", "REDSTONE_LIGHT", "CLAY", "EARTH", "ORGANIC", "PACKED_ICE", "SAND", "SPONGE", "SHULKER", "WOOD", "BAMBOO_SAPLING", "BAMBOO", "WOOL", "TNT", "LEAVES", "GLASS", "ICE", "CACTUS", "ROCK", "IRON", "SNOW_BLOCK", "ANVIL", "BARRIER", "PISTON", "CORAL", "GOURD", "DRAGON_EGG", "CAKE"}));
 
-        sound_ComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{"WOOD", "GROUND", "PLANT", "STONE", "METAL", "GLASS", "CLOTH", "SAND", "SNOW", "LADDER", "ANVIL", "SLIME", "field_226947_m_", "WET_GRASS", "CORAL", "BAMBOO", "BAMBOO_SAPLING", "SCAFFOLDING", "SWEET_BERRY_BUSH", "CROP", "STEM", "NETHER_WART", "LANTERN"}));
+        sound_ComboBox.setModel(new DefaultComboBoxModel<>(new String[]{"NONE", "WOOD", "GROUND", "PLANT", "STONE", "METAL", "GLASS", "CLOTH", "SAND", "SNOW", "LADDER", "ANVIL", "SLIME", "field_226947_m_", "WET_GRASS", "CORAL", "BAMBOO", "BAMBOO_SAPLING", "SCAFFOLDING", "SWEET_BERRY_BUSH", "CROP", "STEM", "NETHER_WART", "LANTERN"}));
 
         harvestLevel_textField.setText("1");
         harvestLevel_textField.addActionListener(new java.awt.event.ActionListener() {
@@ -167,173 +206,175 @@ public class ItemAdderGUI extends javax.swing.JPanel {
         harvestLevel_slider.setToolTipText("");
         harvestLevel_slider.setValue(1);
 
-        harvestTool_ComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{"AXE", "PICKAXE", "SHOVEL"}));
+        harvestTool_ComboBox.setModel(new DefaultComboBoxModel<>(new String[]{"NONE", "AXE", "PICKAXE", "SHOVEL"}));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+        GroupLayout layout = new GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                layout.createParallelGroup(GroupLayout.Alignment.LEADING)
                         .addGroup(layout.createSequentialGroup()
                                 .addContainerGap()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
                                         .addGroup(layout.createSequentialGroup()
                                                 .addComponent(jLabel5)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                                .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
+                                                .addComponent(jLabel6, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                         .addGroup(layout.createSequentialGroup()
-                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
                                                         .addGroup(layout.createSequentialGroup()
-                                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                                                .addGroup(layout.createParallelGroup(GroupLayout.Alignment.TRAILING, false)
                                                                         .addGroup(layout.createSequentialGroup()
-                                                                                .addComponent(generateCode_button, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                                                                .addComponent(generateCode_button, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                                                .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
                                                                                 .addComponent(skip_button))
-                                                                        .addComponent(mainPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                                        .addComponent(imagePanel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                                                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                                                                .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
                                                                         .addComponent(jLabel7)
                                                                         .addComponent(jLabel12)
                                                                         .addComponent(jLabel8)
                                                                         .addComponent(jLabel9)
                                                                         .addComponent(jLabel10)
                                                                         .addComponent(jLabel11))
-                                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                                                .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
+                                                                .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
                                                                         .addGroup(layout.createSequentialGroup()
-                                                                                .addComponent(hardness_textField, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                                                .addComponent(hardness_slider, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                                                        .addComponent(material_ComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                                                .addComponent(hardness_textField, GroupLayout.PREFERRED_SIZE, 70, GroupLayout.PREFERRED_SIZE)
+                                                                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                                                                                .addComponent(hardness_slider, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                                                                        .addComponent(material_ComboBox, 0, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                                                         .addGroup(layout.createSequentialGroup()
-                                                                                .addComponent(resistance_textField, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                                                .addComponent(resistance_slider, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                                                        .addComponent(sound_ComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                                                .addComponent(resistance_textField, GroupLayout.PREFERRED_SIZE, 70, GroupLayout.PREFERRED_SIZE)
+                                                                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                                                                                .addComponent(resistance_slider, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                                                                        .addComponent(sound_ComboBox, 0, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                                                         .addGroup(layout.createSequentialGroup()
-                                                                                .addComponent(harvestLevel_textField, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                                                .addComponent(harvestLevel_slider, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                                                        .addComponent(harvestTool_ComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                                                                .addComponent(harvestLevel_textField, GroupLayout.PREFERRED_SIZE, 70, GroupLayout.PREFERRED_SIZE)
+                                                                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                                                                                .addComponent(harvestLevel_slider, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                                                                        .addComponent(harvestTool_ComboBox, 0, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                                                         .addGroup(layout.createSequentialGroup()
-                                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                                .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
                                                                         .addComponent(jLabel2)
                                                                         .addComponent(jLabel1)
                                                                         .addComponent(jLabel3)
                                                                         .addComponent(jLabel4))
-                                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                                                        .addComponent(unusedDirectory_textField, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 555, Short.MAX_VALUE)
-                                                                        .addComponent(usedDirectory_textField, javax.swing.GroupLayout.Alignment.LEADING)
-                                                                        .addComponent(skippedDirectory_textField, javax.swing.GroupLayout.Alignment.LEADING)
+                                                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                                                                .addGroup(layout.createParallelGroup(GroupLayout.Alignment.TRAILING, false)
+                                                                        .addComponent(unusedDirectory_textField, GroupLayout.Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 555, Short.MAX_VALUE)
+                                                                        .addComponent(usedDirectory_textField, GroupLayout.Alignment.LEADING)
+                                                                        .addComponent(skippedDirectory_textField, GroupLayout.Alignment.LEADING)
                                                                         .addComponent(modDirectory_textField))))
                                                 .addGap(0, 0, Short.MAX_VALUE)))
                                 .addContainerGap())
         );
         layout.setVerticalGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                layout.createParallelGroup(GroupLayout.Alignment.LEADING)
                         .addGroup(layout.createSequentialGroup()
                                 .addContainerGap()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(modDirectory_textField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                                        .addComponent(modDirectory_textField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                                         .addComponent(jLabel1))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(unusedDirectory_textField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                                        .addComponent(unusedDirectory_textField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                                         .addComponent(jLabel2))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(usedDirectory_textField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                                        .addComponent(usedDirectory_textField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                                         .addComponent(jLabel3))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(skippedDirectory_textField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                                        .addComponent(skippedDirectory_textField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                                         .addComponent(jLabel4))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
                                         .addComponent(jLabel5)
                                         .addComponent(jLabel6))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(mainPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                                        .addComponent(imagePanel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                                         .addGroup(layout.createSequentialGroup()
-                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                                .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
                                                         .addGroup(layout.createSequentialGroup()
                                                                 .addComponent(jLabel12)
                                                                 .addGap(18, 18, 18)
-                                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                                                .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
                                                                         .addComponent(jLabel7)
-                                                                        .addComponent(hardness_textField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                                                        .addComponent(hardness_textField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
                                                         .addGroup(layout.createSequentialGroup()
-                                                                .addComponent(material_ComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                                .addComponent(hardness_slider, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                                                .addComponent(material_ComboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                                                                .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                                .addComponent(hardness_slider, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
+                                                .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
+                                                .addGroup(layout.createParallelGroup(GroupLayout.Alignment.TRAILING)
+                                                        .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
                                                                 .addComponent(jLabel8)
-                                                                .addComponent(resistance_textField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                                        .addComponent(resistance_slider, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                                                .addComponent(resistance_textField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                                                        .addComponent(resistance_slider, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                                                .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
+                                                .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
                                                         .addComponent(jLabel9)
-                                                        .addComponent(sound_ComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                        .addComponent(sound_ComboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
                                                 .addGap(15, 15, 15)
-                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                                                .addComponent(harvestLevel_textField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                                                        .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                                                                .addComponent(harvestLevel_textField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                                                                 .addComponent(jLabel10))
-                                                        .addComponent(harvestLevel_slider, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                                        .addComponent(harvestLevel_slider, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                                                .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
+                                                .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
                                                         .addComponent(jLabel11)
-                                                        .addComponent(harvestTool_ComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                        .addComponent(harvestTool_ComboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))))
+                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
                                         .addComponent(skip_button)
                                         .addComponent(generateCode_button))
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }
 
     // Button declarations.
-    private javax.swing.JButton generateCode_button;
-    private javax.swing.JButton skip_button;
+    private JButton generateCode_button;
+    private JButton skip_button;
 
     // Combo box declarations.
-    private javax.swing.JComboBox<String> material_ComboBox;
-    private javax.swing.JComboBox<String> sound_ComboBox;
-    private javax.swing.JComboBox<String> harvestTool_ComboBox;
+    private JComboBox<String> material_ComboBox;
+    private JComboBox<String> sound_ComboBox;
+    private JComboBox<String> harvestTool_ComboBox;
 
     // Lavel declarations.
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
+    private JLabel jLabel1;
+    private JLabel jLabel10;
+    private JLabel jLabel11;
+    private JLabel jLabel12;
+    private JLabel jLabel2;
+    private JLabel jLabel3;
+    private JLabel jLabel4;
+    private JLabel jLabel5;
+    private JLabel jLabel6;
+    private JLabel jLabel7;
+    private JLabel jLabel8;
+    private JLabel jLabel9;
 
     // Panel declarations.
-    private javax.swing.JPanel mainPanel;
+    private JPanel imagePanel;
+    private ImageIcon imageIcon;
+    private JLabel imageIconLabel;
 
     // Slider declarations.
-    private javax.swing.JSlider resistance_slider;
-    private javax.swing.JSlider hardness_slider;
-    private javax.swing.JSlider harvestLevel_slider;
+    private JSlider resistance_slider;
+    private JSlider hardness_slider;
+    private JSlider harvestLevel_slider;
 
     // Text field declarations.
-    private javax.swing.JTextField modDirectory_textField;
-    private javax.swing.JTextField unusedDirectory_textField;
-    private javax.swing.JTextField usedDirectory_textField;
-    private javax.swing.JTextField skippedDirectory_textField;
-    private javax.swing.JTextField hardness_textField;
-    private javax.swing.JTextField resistance_textField;
-    private javax.swing.JTextField harvestLevel_textField;
+    private JTextField modDirectory_textField;
+    private JTextField unusedDirectory_textField;
+    private JTextField usedDirectory_textField;
+    private JTextField skippedDirectory_textField;
+    private JTextField hardness_textField;
+    private JTextField resistance_textField;
+    private JTextField harvestLevel_textField;
 
     private void modDirectory_textFieldActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
@@ -361,5 +402,43 @@ public class ItemAdderGUI extends javax.swing.JPanel {
 
     private void harvestLevel_textFieldActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
+    }
+
+    private void generateCode_buttonActionPerformed(java.awt.event.ActionEvent evt) throws IOException {
+        // TODO add your handling code here:
+
+        // For testing.
+        if (testCount == 0) {
+            File file = new File("C:\\cygwin64\\home\\d0sag3\\WorldOfMinecraft\\textures_test\\test_image.png");
+            displayImage(file);
+            testCount = 1;
+        } else if (testCount == 1){
+            File file = new File("C:\\cygwin64\\home\\d0sag3\\WorldOfMinecraft\\textures_test\\test_image2.png");
+            displayImage(file);
+            testCount = 0;
+        }
+    }
+    private int testCount;
+
+    private void displayImage(File file) throws IOException {
+        BufferedImage image = ImageIO.read(file);
+        imageIcon = new ImageIcon(image);
+        ImageIcon imageIconScaled = new ImageIcon(getScaledImage(imageIcon.getImage(), 256, 256));
+        imagePanel.add(imageIconLabel);
+        imageIconLabel.setIcon(imageIconScaled);
+        imagePanel.revalidate();
+        imagePanel.repaint();
+    }
+
+    // From https://stackoverflow.com/questions/6714045/how-to-resize-jlabel-imageicon
+    private Image getScaledImage(Image srcImg, int width, int height){
+        BufferedImage resizedImg = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
+        Graphics2D g2 = resizedImg.createGraphics();
+
+        g2.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
+        g2.drawImage(srcImg, 0, 0, width, height, null);
+        g2.dispose();
+
+        return resizedImg;
     }
 }
