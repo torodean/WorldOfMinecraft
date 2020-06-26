@@ -1,0 +1,6 @@
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "all": "warcraftitems:blocks/deepholm_micro_cave_block"
+  }
+}

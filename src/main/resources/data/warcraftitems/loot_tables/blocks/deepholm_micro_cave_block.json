@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "warcraftitems:deepholm_micro_cave_block"
+        }
+      ]
+    }
+  ]
+}
