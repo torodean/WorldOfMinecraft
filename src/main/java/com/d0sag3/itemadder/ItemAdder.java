@@ -18,10 +18,11 @@ import java.awt.event.ActionListener;
  * It will be designed to parse through the WoW textures and give the user options to set block properties
  * and then automatically generate the code needed for the mod/Minecraft to add the textures/blocks to the game.
  */
-public class ItemAdderGUI implements ActionListener {
+public class ItemAdder implements ActionListener {
 
     // The mod directory is the directory that the root directory that the mod files can be found.
     public static String modDirectory = "C:\\Users\\d0sag3\\Desktop\\WarcraftItems";
+
 
     // Java GUI elements.
     private JPanel panel;
@@ -30,12 +31,12 @@ public class ItemAdderGUI implements ActionListener {
     private JLabel label;
 
     // Main constructor for the Item Adder GUI.
-    public ItemAdderGUI() {
-        initGUI();
+    public ItemAdder() {
+        init();
     }
 
     // Initialization function for the GUI. This will place the elements and set up the gui default values.
-    public void initGUI() {
+    public void init() {
         frame = new JFrame();
 
         button = new JButton("Generate");
@@ -56,8 +57,6 @@ public class ItemAdderGUI implements ActionListener {
         frame.setVisible(true);
     }
 
-
-
     @Override
     public void actionPerformed(ActionEvent e){
         label.setText(modDirectory);
@@ -65,7 +64,7 @@ public class ItemAdderGUI implements ActionListener {
 
     // The main function to run the GUI program.
     public static void main(String[] args) {
-        new ItemAdderGUI();
+        new ItemAdder();
     }
 
 }
