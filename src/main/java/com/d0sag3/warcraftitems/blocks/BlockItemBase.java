@@ -6,8 +6,9 @@ import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 
+// This is a base class for block items.
 public class BlockItemBase extends BlockItem {
     public BlockItemBase(Block block) {
-        super(block, new Item.Properties().group(ItemGroup.BUILDING_BLOCKS));
+        super(block, new Item.Properties().group(WarcraftItems.WOW_ITEMS));
     }
 }

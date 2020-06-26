@@ -21,7 +21,7 @@ public class RegistryHandler {
     }
 
     // Items
-    public static final RegistryObject<Item> TEST_ITEM = ITEMS.register("test_item", ItemBase::new);
+    public static final RegistryObject<Item> WOWTOKEN_ICON = ITEMS.register("wowtoken_icon", ItemBase::new);
 
     // Blocks
     public static final RegistryObject<Block> DEEPHOLM_MICRO_CAVE_BLOCK = BLOCKS.register("deepholm_micro_cave_block", DeepholmMicroCaveBlock::new);
