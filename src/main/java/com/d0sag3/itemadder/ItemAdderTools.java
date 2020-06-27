@@ -157,7 +157,7 @@ public class ItemAdderTools {
 
     // This is the text to be added to the registry handler.
     public String getRegistryHandlerText(){
-        return "    public static final RegistryObject<Block> " + getBlockNameCapitalized() + " = BLOCKS.register(\"" + getBlockName() + "\", " + getBlockNameClass() + "::new);\n"
+        return "    public static final RegistryObject<Block> " + getBlockNameCapitalized() + " = BLOCKS.register(\"" + getBlockName() + "\", " + getBlockNameClass() + "::new);\n";
     }
 
     // This will add the appropriate text for the new block to the Registry Handler.
