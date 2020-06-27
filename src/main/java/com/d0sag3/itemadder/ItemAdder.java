@@ -7,6 +7,8 @@
 
 package com.d0sag3.itemadder;
 
+import java.io.IOException;
+
 /**
  * The Item Adder is a class that will handle automatic generation of minecraft data given user input.
  * It will be designed to parse through the WoW textures and give the user options to set block properties
@@ -21,7 +23,13 @@ public class ItemAdder {
 
     // Initialization function for the GUI. This will place the elements and set up the gui default values.
     private void init() {
-        java.awt.EventQueue.invokeLater(() -> new ItemAdderFrame().setVisible(true));
+        java.awt.EventQueue.invokeLater(() -> {
+            try {
+                new ItemAdderFrame().setVisible(true);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
     }
 
     // The main function to run the GUI program.
@@ -30,6 +38,5 @@ public class ItemAdder {
         new ItemAdder();
         System.out.println("...Program finished!");
     }
-
 }
 

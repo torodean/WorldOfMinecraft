@@ -1,11 +1,16 @@
 package com.d0sag3.itemadder;
 
+import java.io.IOException;
+
 public class ItemAdderFrame extends javax.swing.JFrame {
+
+    // Variables declaration.
+    public ItemAdderPanel mainPanel;
 
     /**
      * Creates new form ItemAdderFrame
      */
-    public ItemAdderFrame() {
+    public ItemAdderFrame() throws IOException {
         initComponents();
     }
 
@@ -14,7 +19,7 @@ public class ItemAdderFrame extends javax.swing.JFrame {
      */
     @SuppressWarnings("unchecked")
     // Initializes the frame and adds the ItemAdderPanel to it.
-    private void initComponents() {
+    private void initComponents() throws IOException {
 
         mainPanel = new ItemAdderPanel();
 
@@ -37,8 +42,4 @@ public class ItemAdderFrame extends javax.swing.JFrame {
 
         pack();
     }
-
-
-    // Variables declaration.
-    private ItemAdderPanel mainPanel;
 }

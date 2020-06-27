@@ -13,6 +13,11 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * This class is for the GUI form that ItemAdder uses.
@@ -21,26 +26,36 @@ import java.io.IOException;
 public class ItemAdderPanel extends JPanel {
 
     // The mod directory is the directory that the root directory that the mod files can be found.
-    public static String modDirectory = "C:\\Users\\d0sag3\\Desktop\\WarcraftItems";
+    public String modDirectory = "C:\\Users\\d0sag3\\Desktop\\WarcraftItems";
 
     // The used directory is the directory that the already added textures get moved to.
-    public static String usedDirectory = "C:\\Users\\d0sag3\\Desktop\\WarcraftItems\\textures_converted";
+    public static String usedDirectory = "C:\\cygwin64\\home\\d0sag3\\WorldOfMinecraft\\textures_converted";
 
     // The unused directory is the directory that the textures to be added can be found.
-    public static String unusedDirectory = "C:\\Users\\d0sag3\\Desktop\\WarcraftItems\\textures_unconverted";
+    public static String unusedDirectory = "C:\\cygwin64\\home\\d0sag3\\WorldOfMinecraft\\textures_unconverted";
 
     // The skipped directory is the directory that the textures that were skipped are moved to.
-    public static String skippedDirectory = "C:\\Users\\d0sag3\\Desktop\\WarcraftItems\\textures_skipped";
+    public static String skippedDirectory = "C:\\cygwin64\\home\\d0sag3\\WorldOfMinecraft\\textures_skipped";
+
+    // The current selected file.
+    public File currentFile;
+
+    List<File> filesToParse;
 
     // Creates new form Panel to house the gui.
-    public ItemAdderPanel() {
+    public ItemAdderPanel() throws IOException {
         initComponents();
         this.setVisible(true);
     }
 
     @SuppressWarnings("unchecked")
-    private void initComponents() {
+    private void initComponents() throws IOException {
         testCount = 0;
+
+        filesToParse = Files.walk(Paths.get(unusedDirectory))
+                .filter(Files::isRegularFile)
+                .map(Path::toFile)
+                .collect(Collectors.toList());
 
         // Image items.
         imagePanel = new JPanel();
@@ -332,6 +347,37 @@ public class ItemAdderPanel extends JPanel {
                                         .addComponent(generateCode_button))
                                 .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
+        displayImage(filesToParse.get(0));
+    }
+
+    // This will return the selected material value.
+    public String getMaterial_ComboBoxValue(){
+        return material_ComboBox.getSelectedItem().toString();
+    }
+
+    // This will return the selected sound value.
+    public String getSound_ComboBoxValue(){
+        return sound_ComboBox.getSelectedItem().toString();
+    }
+
+    // This will return the selected harvest tool value.
+    public String getHarvestTool_ComboBoxValue(){
+        return harvestTool_ComboBox.getSelectedItem().toString();
+    }
+
+    // This will return the harvest level.
+    public String getHardnessValue(){
+        return hardness_textField.getText();
+    }
+
+    // This will return the harvest level.
+    public String getResistanceValue(){
+        return resistance_textField.getText();
+    }
+
+    // This will return the harvest level.
+    public String getHarvestLevelValue(){
+        return harvestLevel_textField.getText();
     }
 
     // Button declarations.
@@ -404,21 +450,19 @@ public class ItemAdderPanel extends JPanel {
         // TODO add your handling code here:
     }
 
+    private int testCount;
     private void generateCode_buttonActionPerformed(java.awt.event.ActionEvent evt) throws IOException {
         // TODO add your handling code here:
 
         // For testing.
         if (testCount == 0) {
-            File file = new File("C:\\cygwin64\\home\\d0sag3\\WorldOfMinecraft\\textures_test\\test_image.png");
-            displayImage(file);
+            displayImage(filesToParse.get(1));
             testCount = 1;
         } else if (testCount == 1){
-            File file = new File("C:\\cygwin64\\home\\d0sag3\\WorldOfMinecraft\\textures_test\\test_image2.png");
-            displayImage(file);
+            displayImage(filesToParse.get(0));
             testCount = 0;
         }
     }
-    private int testCount;
 
     private void displayImage(File file) throws IOException {
         BufferedImage image = ImageIO.read(file);
