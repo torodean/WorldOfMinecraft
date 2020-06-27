@@ -311,12 +311,12 @@ public class ItemAdderTools {
         Path path = Paths.get(mainPanel.modDirectory + "\\textures_unconverted\\" + getFileName());
         Files.copy(path, Paths.get(mainPanel.modDirectory + "\\src\\main\\resources\\assets\\warcraftitems\\textures\\blocks\\" + getBlockName() + ".png"));
         Files.copy(path, Paths.get(mainPanel.modDirectory + "\\src\\main\\resources\\assets\\warcraftitems\\textures\\items\\" + getBlockName() + ".png"));
-        Files.move(path, Paths.get(mainPanel.usedDirectory + "\\" + getBlockName() + ".png"));
+        Files.move(path, Paths.get(mainPanel.usedDirectory + "\\" + getFileName()));
     }
 
     public void skipTextures() throws IOException {
         Path path = Paths.get(mainPanel.modDirectory + "\\textures_unconverted\\" + getFileName());
-        Files.move(path, Paths.get(mainPanel.skippedDirectory + "\\" + getBlockName() + ".png"));
+        Files.move(path, Paths.get(mainPanel.skippedDirectory + "\\" + getFileName()));
     }
 
     // Creates a file.
