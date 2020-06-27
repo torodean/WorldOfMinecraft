@@ -17,6 +17,7 @@ import java.util.Scanner;
  */
 public class ItemAdderTools {
 
+    private String filePath;
     private String itemName;
     private String blockName;
     private String fileName;
@@ -31,6 +32,7 @@ public class ItemAdderTools {
     // Initializes the information for this class.
     // Must be used after each call to AddFullBlock() or skipBlock().
     public void update(){
+        filePath = mainPanel.filesToParse.get(mainPanel.currentFileIndex).getAbsolutePath();
         fileName = mainPanel.filesToParse.get(mainPanel.currentFileIndex).getName();
         System.out.println("fileName set to: " + fileName);
 
@@ -308,14 +310,14 @@ public class ItemAdderTools {
     }
 
     public void addTextures() throws IOException {
-        Path path = Paths.get(mainPanel.modDirectory + "\\textures_unconverted\\" + getFileName());
+        Path path = Paths.get(filePath);
         Files.copy(path, Paths.get(mainPanel.modDirectory + "\\src\\main\\resources\\assets\\warcraftitems\\textures\\blocks\\" + getBlockName() + ".png"));
         Files.copy(path, Paths.get(mainPanel.modDirectory + "\\src\\main\\resources\\assets\\warcraftitems\\textures\\items\\" + getBlockName() + ".png"));
         Files.move(path, Paths.get(mainPanel.usedDirectory + "\\" + getFileName()));
     }
 
     public void skipTextures() throws IOException {
-        Path path = Paths.get(mainPanel.modDirectory + "\\textures_unconverted\\" + getFileName());
+        Path path = Paths.get(filePath);
         Files.move(path, Paths.get(mainPanel.skippedDirectory + "\\" + getFileName()));
     }
 
