@@ -2,7 +2,6 @@ package com.d0sag3.itemadder;
 
 //import org.apache.commons.text.WordUtils;
 
-import javax.swing.*;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;  // Import the IOException class to handle errors
@@ -32,14 +31,58 @@ public class ItemAdderTools {
     // Must be used after each call to AddFullBlock() or skipBlock().
     public void update(){
         fileName = mainPanel.filesToParse.get(mainPanel.currentFileIndex).getName();
+        System.out.println("fileName set to: " + fileName);
         // Variables stored in this class.
         String itemName = fileName.substring(0, fileName.length() - 4);
-        blockName = itemName + "_block";
+        System.out.println("itemName set to: " + itemName);
+        blockName = numberlessText(itemName) + "_block";
+        System.out.println("blockName set to: " + blockName);
     }
 
     // This returns the item name without a file ending (containing the underscores).
     public String getBlockName(){
         return blockName;
+    }
+
+    // This will replace numbers in the string with words.
+    public String numberlessText(String input){
+        StringBuilder output = new StringBuilder();
+        for (int i=0; i < input.length(  ); i++) {
+            if(Character.isDigit(input.charAt(i))){
+                output.append(getNumberChar(input.charAt(i)));
+            } else {
+                output.append(input.charAt(i));
+            }
+        }
+        System.out.println("numberlessText created: " + output.toString());
+        return output.toString();
+    }
+
+    //Returns a string depending on the input char.
+    public String getNumberChar(char input){
+        if (input == '0') {
+            return "Zer";
+        } else if (input == '1') {
+            return "One";
+        } else if (input == '2') {
+            return "Two";
+        } else if (input == '3') {
+            return "The";
+        } else if (input == '4') {
+            return "Fou";
+        } else if (input == '5') {
+            return "Fiv";
+        } else if (input == '6') {
+            return "Six";
+        } else if (input == '7') {
+            return "Sev";
+        } else if (input == '8') {
+            return "Eig";
+        } else if (input == '9') {
+            return "Nin";
+        } else {
+            return "";
+        }
     }
 
     // This returns the fileName with the file extension.
@@ -49,6 +92,7 @@ public class ItemAdderTools {
 
     // This returns the name of the item in all caps.
     public String getBlockNameCapitalized(){
+        System.out.println("getBlockNameCapitalized returning: " + blockName.toUpperCase());
         return blockName.toUpperCase();
     }
 
@@ -62,14 +106,13 @@ public class ItemAdderTools {
             properBlockName.append(Character.toUpperCase(word.charAt(0))).append(word.substring(1)).append(" ");
         }
 
+        System.out.println("getBlockNameProper returning: " + properBlockName.toString());
         return properBlockName.toString();
-
-        // This won't work because I can't get it to compile with my added jar. Pity.
-        // return WordUtils.capitalizeFully(blockName.replaceAll("_", "\\s"));
     }
 
     // This returns the name of the item as shown in Minecraft.
     public String getBlockNameClass(){
+        System.out.println("getBlockNameClass returning: " + getBlockNameProper().replaceAll("\\s", "").trim());
         return getBlockNameProper().replaceAll("\\s", "").trim();
     }
 
@@ -140,13 +183,12 @@ public class ItemAdderTools {
     public String getBlockClassText(){
         String soundComponent = "";
         String harvestToolComponent = "";
-        if (mainPanel.getSound_ComboBoxValue().equals("NONE")) {
+        if (!mainPanel.getSound_ComboBoxValue().equals("NONE")) {
             soundComponent = "                .sound(SoundType." + mainPanel.getSound_ComboBoxValue() + ")\n";
         }
-        if (mainPanel.getHarvestTool_ComboBoxValue().equals("NONE")) {
+        if (!mainPanel.getHarvestTool_ComboBoxValue().equals("NONE")) {
             harvestToolComponent = "                .harvestTool(ToolType." + mainPanel.getHarvestTool_ComboBoxValue() + ")\n";
         }
-
 
         return "package com.d0sag3.warcraftitems.blocks;\n" +
                 "\n" +
@@ -186,7 +228,7 @@ public class ItemAdderTools {
         Charset charset = StandardCharsets.UTF_8;
 
         String content = new String(Files.readAllBytes(path), charset);
-        content = content.replaceAll("// Blocks\n", "// Blocks\n" + getRegistryHandlerText());
+        content = content.replaceAll("// Blocks", "// Blocks\n" + getRegistryHandlerText());
         Files.write(path, content.getBytes(charset));
     }
 
@@ -229,14 +271,14 @@ public class ItemAdderTools {
 
     public void addTextures() throws IOException {
         Path path = Paths.get(mainPanel.modDirectory + "\\textures_unconverted\\" + getFileName());
-        Files.copy(path, Paths.get(mainPanel.modDirectory + "\\src\\main\\resources\\assets\\warcraftitems\\textures\\blocks\\" + getFileName()));
-        Files.copy(path, Paths.get(mainPanel.modDirectory + "\\src\\main\\resources\\assets\\warcraftitems\\textures\\items\\" + getFileName()));
-        Files.move(path, Paths.get(mainPanel.usedDirectory + "\\" + getFileName()));
+        Files.copy(path, Paths.get(mainPanel.modDirectory + "\\src\\main\\resources\\assets\\warcraftitems\\textures\\blocks\\" + getBlockName()));
+        Files.copy(path, Paths.get(mainPanel.modDirectory + "\\src\\main\\resources\\assets\\warcraftitems\\textures\\items\\" + getBlockName()));
+        Files.move(path, Paths.get(mainPanel.usedDirectory + "\\" + getBlockName()));
     }
 
     public void skipTextures() throws IOException {
         Path path = Paths.get(mainPanel.modDirectory + "\\textures_unconverted\\" + getFileName());
-        Files.move(path, Paths.get(mainPanel.skippedDirectory + "\\" + getFileName()));
+        Files.move(path, Paths.get(mainPanel.skippedDirectory + "\\" + getBlockName()));
     }
 
     // Creates a file.
