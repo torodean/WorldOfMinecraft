@@ -17,6 +17,7 @@ import java.util.Scanner;
  */
 public class ItemAdderTools {
 
+    private String itemName;
     private String blockName;
     private String fileName;
     ItemAdderPanel mainPanel;
@@ -33,7 +34,7 @@ public class ItemAdderTools {
         fileName = mainPanel.filesToParse.get(mainPanel.currentFileIndex).getName();
         System.out.println("fileName set to: " + fileName);
 
-        String itemName = fileName.substring(0, fileName.length() - 4);
+        itemName = fileName.substring(0, fileName.length() - 4);
         System.out.println("itemName set to: " + itemName);
 
         blockName = numberlessText(itemName) + "_block";
@@ -233,7 +234,7 @@ public class ItemAdderTools {
 
     // This is the block item section to add to the registry handler.
     public String getRegistryHandlerBlockItemText(){
-        return "    public static final RegistryObject<Item> " + getBlockNameCapitalized() + "\n" +
+        return "    public static final RegistryObject<Item> " + getBlockNameCapitalized() + "_ITEM" + "\n" +
                 "            = ITEMS.register(\"" + getBlockName() + "\", () -> new BlockItemBase(" + getBlockNameCapitalized() + ".get()));";
     }
 
