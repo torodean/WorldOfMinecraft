@@ -32,9 +32,10 @@ public class ItemAdderTools {
     public void update(){
         fileName = mainPanel.filesToParse.get(mainPanel.currentFileIndex).getName();
         System.out.println("fileName set to: " + fileName);
-        // Variables stored in this class.
+
         String itemName = fileName.substring(0, fileName.length() - 4);
         System.out.println("itemName set to: " + itemName);
+
         blockName = numberlessText(itemName) + "_block";
         System.out.println("blockName set to: " + blockName);
     }
@@ -61,25 +62,25 @@ public class ItemAdderTools {
     //Returns a string depending on the input char.
     public String getNumberChar(char input){
         if (input == '0') {
-            return "Zer";
+            return "zer";
         } else if (input == '1') {
-            return "One";
+            return "one";
         } else if (input == '2') {
-            return "Two";
+            return "two";
         } else if (input == '3') {
-            return "The";
+            return "the";
         } else if (input == '4') {
-            return "Fou";
+            return "fou";
         } else if (input == '5') {
-            return "Fiv";
+            return "fiv";
         } else if (input == '6') {
-            return "Six";
+            return "six";
         } else if (input == '7') {
-            return "Sev";
+            return "sev";
         } else if (input == '8') {
-            return "Eig";
+            return "eig";
         } else if (input == '9') {
-            return "Nin";
+            return "nin";
         } else {
             return "";
         }
@@ -98,22 +99,25 @@ public class ItemAdderTools {
 
     // This returns the name of the item as shown in Minecraft.
     public String getBlockNameProper(){
+        String output = "";
         StringBuilder properBlockName = new StringBuilder();
-        Scanner scan = new Scanner(blockName);
+        String noUnderscores = blockName.replaceAll("_", " ");
+        Scanner scan = new Scanner(noUnderscores);
 
         while(scan.hasNext()) {
             String word = scan.next();
             properBlockName.append(Character.toUpperCase(word.charAt(0))).append(word.substring(1)).append(" ");
         }
 
-        System.out.println("getBlockNameProper returning: " + properBlockName.toString());
-        return properBlockName.toString();
+        output = properBlockName.toString().trim();
+        System.out.println("getBlockNameProper returning: " + output);
+        return output;
     }
 
     // This returns the name of the item as shown in Minecraft.
     public String getBlockNameClass(){
-        System.out.println("getBlockNameClass returning: " + getBlockNameProper().replaceAll("\\s", "").trim());
-        return getBlockNameProper().replaceAll("\\s", "").trim();
+        System.out.println("getBlockNameClass returning: " + getBlockNameProper().replaceAll(" ", ""));
+        return getBlockNameProper().replaceAll(" ", "");
     }
 
     // This is the text to be added into the block states file.
@@ -219,7 +223,22 @@ public class ItemAdderTools {
 
     // This is the text to be added to the registry handler.
     public String getRegistryHandlerText(){
-        return "    public static final RegistryObject<Block> " + getBlockNameCapitalized() + " = BLOCKS.register(\"" + getBlockName() + "\", " + getBlockNameClass() + "::new);\n";
+        return "    public static final RegistryObject<Block> " + getBlockNameCapitalized() + " = BLOCKS.register(\"" + getBlockName() + "\", " + getBlockNameClass() + "::new);";
+    }
+
+    // This is the import to add to the registryHandler.
+    public String getRegistryHandlerImport(){
+        return "import com.d0sag3.warcraftitems.blocks." + getBlockNameClass() + ";";
+    }
+
+    // This will add the appropriate text for the import to the Registry Handler.
+    public void addRegistryHandlerImport() throws IOException {
+        Path path = Paths.get(mainPanel.modDirectory + "\\src\\main\\java\\com\\d0sag3\\warcraftitems\\util\\RegistryHandler.java");
+        Charset charset = StandardCharsets.UTF_8;
+
+        String content = new String(Files.readAllBytes(path), charset);
+        content = content.replaceAll("// Imports", "// Imports\n" + getRegistryHandlerImport());
+        Files.write(path, content.getBytes(charset));
     }
 
     // This will add the appropriate text for the new block to the Registry Handler.
@@ -265,20 +284,21 @@ public class ItemAdderTools {
         addItemModelFile();
         addLangAddition();
         addRegistryHandlerText();
+        addRegistryHandlerImport();
         addLootTableFile();
         addTextures();
     }
 
     public void addTextures() throws IOException {
         Path path = Paths.get(mainPanel.modDirectory + "\\textures_unconverted\\" + getFileName());
-        Files.copy(path, Paths.get(mainPanel.modDirectory + "\\src\\main\\resources\\assets\\warcraftitems\\textures\\blocks\\" + getBlockName()));
-        Files.copy(path, Paths.get(mainPanel.modDirectory + "\\src\\main\\resources\\assets\\warcraftitems\\textures\\items\\" + getBlockName()));
+        Files.copy(path, Paths.get(mainPanel.modDirectory + "\\src\\main\\resources\\assets\\warcraftitems\\textures\\blocks\\" + getBlockName() + ".png"));
+        Files.copy(path, Paths.get(mainPanel.modDirectory + "\\src\\main\\resources\\assets\\warcraftitems\\textures\\items\\" + getBlockName() + ".png"));
         Files.move(path, Paths.get(mainPanel.usedDirectory + "\\" + getBlockName()));
     }
 
     public void skipTextures() throws IOException {
         Path path = Paths.get(mainPanel.modDirectory + "\\textures_unconverted\\" + getFileName());
-        Files.move(path, Paths.get(mainPanel.skippedDirectory + "\\" + getBlockName()));
+        Files.move(path, Paths.get(mainPanel.skippedDirectory + "\\" + getBlockName() + ".png"));
     }
 
     // Creates a file.

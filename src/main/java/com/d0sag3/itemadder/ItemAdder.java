@@ -34,9 +34,7 @@ public class ItemAdder {
 
     // The main function to run the GUI program.
     public static void main(String[] args) {
-        System.out.println("...Program started!");
         new ItemAdder();
-        System.out.println("...Program finished!");
     }
 }
 

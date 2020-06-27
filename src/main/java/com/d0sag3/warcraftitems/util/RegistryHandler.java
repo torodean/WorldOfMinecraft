@@ -1,5 +1,6 @@
 package com.d0sag3.warcraftitems.util;
 
+// Imports
 import com.d0sag3.warcraftitems.WarcraftItems;
 import com.d0sag3.warcraftitems.blocks.BlockItemBase;
 import com.d0sag3.warcraftitems.blocks.DeepholmMicroCaveBlock;
