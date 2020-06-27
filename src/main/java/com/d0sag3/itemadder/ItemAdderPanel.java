@@ -79,7 +79,7 @@ public class ItemAdderPanel extends JPanel {
         jLabel5 = new JLabel();
         generateCode_button = new JButton();
         skip_button = new JButton();
-        jLabel6 = new JLabel();
+        current_texture = new JLabel();
         jLabel7 = new JLabel();
         jLabel8 = new JLabel();
         jLabel9 = new JLabel();
@@ -159,7 +159,7 @@ public class ItemAdderPanel extends JPanel {
             }
         });
 
-        jLabel6.setText("texture_name");
+        current_texture.setText("texture_name");
 
         jLabel7.setText("Hardness:");
 
@@ -218,7 +218,7 @@ public class ItemAdderPanel extends JPanel {
                                         .addGroup(layout.createSequentialGroup()
                                                 .addComponent(jLabel5)
                                                 .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
-                                                .addComponent(jLabel6, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                                .addComponent(current_texture, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                         .addGroup(layout.createSequentialGroup()
                                                 .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
                                                         .addGroup(layout.createSequentialGroup()
@@ -290,7 +290,7 @@ public class ItemAdderPanel extends JPanel {
                                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
                                         .addComponent(jLabel5)
-                                        .addComponent(jLabel6))
+                                        .addComponent(current_texture))
                                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
                                         .addComponent(imagePanel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
@@ -382,7 +382,7 @@ public class ItemAdderPanel extends JPanel {
     private JLabel jLabel3;
     private JLabel jLabel4;
     private JLabel jLabel5;
-    private JLabel jLabel6;
+    private JLabel current_texture;
     private JLabel jLabel7;
     private JLabel jLabel8;
     private JLabel jLabel9;
@@ -462,6 +462,7 @@ public class ItemAdderPanel extends JPanel {
 
     private void displayImage(File file) throws IOException {
         BufferedImage image = ImageIO.read(file);
+        current_texture.setText(file.getName());
         imageIcon = new ImageIcon(image);
         ImageIcon imageIconScaled = new ImageIcon(getScaledImage(imageIcon.getImage(), 256, 256));
         imagePanel.add(imageIconLabel);
