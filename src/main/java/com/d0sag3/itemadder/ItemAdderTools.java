@@ -226,9 +226,25 @@ public class ItemAdderTools {
         return "    public static final RegistryObject<Block> " + getBlockNameCapitalized() + " = BLOCKS.register(\"" + getBlockName() + "\", " + getBlockNameClass() + "::new);";
     }
 
-    // This is the import to add to the registryHandler.
+    // This is the import to add to the registry handler.
     public String getRegistryHandlerImport(){
         return "import com.d0sag3.warcraftitems.blocks." + getBlockNameClass() + ";";
+    }
+
+    // This is the block item section to add to the registry handler.
+    public String getRegistryHandlerBlockItemText(){
+        return "    public static final RegistryObject<Item> " + getBlockNameCapitalized() + "\n" +
+                "            = ITEMS.register(\"" + getBlockName() + "\", () -> new BlockItemBase(" + getBlockNameCapitalized() + ".get()));";
+    }
+
+    // This will add the appropriate text for the block item to the Registry Handler.
+    public void addRegistryHandlerBlockItemText() throws IOException {
+        Path path = Paths.get(mainPanel.modDirectory + "\\src\\main\\java\\com\\d0sag3\\warcraftitems\\util\\RegistryHandler.java");
+        Charset charset = StandardCharsets.UTF_8;
+
+        String content = new String(Files.readAllBytes(path), charset);
+        content = content.replaceAll("// Block Items", "// Block Items\n" + getRegistryHandlerBlockItemText());
+        Files.write(path, content.getBytes(charset));
     }
 
     // This will add the appropriate text for the import to the Registry Handler.
@@ -284,6 +300,7 @@ public class ItemAdderTools {
         addItemModelFile();
         addLangAddition();
         addRegistryHandlerText();
+        addRegistryHandlerBlockItemText();
         addRegistryHandlerImport();
         addLootTableFile();
         addTextures();
@@ -293,7 +310,7 @@ public class ItemAdderTools {
         Path path = Paths.get(mainPanel.modDirectory + "\\textures_unconverted\\" + getFileName());
         Files.copy(path, Paths.get(mainPanel.modDirectory + "\\src\\main\\resources\\assets\\warcraftitems\\textures\\blocks\\" + getBlockName() + ".png"));
         Files.copy(path, Paths.get(mainPanel.modDirectory + "\\src\\main\\resources\\assets\\warcraftitems\\textures\\items\\" + getBlockName() + ".png"));
-        Files.move(path, Paths.get(mainPanel.usedDirectory + "\\" + getBlockName()));
+        Files.move(path, Paths.get(mainPanel.usedDirectory + "\\" + getBlockName() + ".png"));
     }
 
     public void skipTextures() throws IOException {

@@ -4,7 +4,6 @@ import com.d0sag3.warcraftitems.WarcraftItems;
 import net.minecraft.block.Block;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemGroup;
 
 // This is a base class for block items.
 public class BlockItemBase extends BlockItem {
