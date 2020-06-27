@@ -9,6 +9,7 @@ package com.d0sag3.itemadder;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
+import javax.swing.event.ChangeEvent;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -26,36 +27,41 @@ import java.util.stream.Collectors;
 public class ItemAdderPanel extends JPanel {
 
     // The mod directory is the directory that the root directory that the mod files can be found.
-    public String modDirectory = "C:\\Users\\d0sag3\\Desktop\\WarcraftItems";
+    public String modDirectory = "C:\\cygwin64\\home\\d0sag3\\WorldOfMinecraft";
 
     // The used directory is the directory that the already added textures get moved to.
-    public static String usedDirectory = "C:\\cygwin64\\home\\d0sag3\\WorldOfMinecraft\\textures_converted";
+    public String usedDirectory = "C:\\cygwin64\\home\\d0sag3\\WorldOfMinecraft\\textures_converted";
 
     // The unused directory is the directory that the textures to be added can be found.
-    public static String unusedDirectory = "C:\\cygwin64\\home\\d0sag3\\WorldOfMinecraft\\textures_unconverted";
+    public String unusedDirectory = "C:\\cygwin64\\home\\d0sag3\\WorldOfMinecraft\\textures_unconverted";
 
     // The skipped directory is the directory that the textures that were skipped are moved to.
-    public static String skippedDirectory = "C:\\cygwin64\\home\\d0sag3\\WorldOfMinecraft\\textures_skipped";
+    public String skippedDirectory = "C:\\cygwin64\\home\\d0sag3\\WorldOfMinecraft\\textures_skipped";
 
-    // The current selected file.
-    public File currentFile;
-
+    // A list of files to be parsed.
     List<File> filesToParse;
 
     // Creates new form Panel to house the gui.
     public ItemAdderPanel() throws IOException {
         initComponents();
         this.setVisible(true);
+        displayImage(filesToParse.get(currentFileIndex));
     }
+
+    ItemAdderTools itemAdderTool;
+    public int currentFileIndex;
 
     @SuppressWarnings("unchecked")
     private void initComponents() throws IOException {
-        testCount = 0;
 
         filesToParse = Files.walk(Paths.get(unusedDirectory))
                 .filter(Files::isRegularFile)
                 .map(Path::toFile)
                 .collect(Collectors.toList());
+
+        currentFileIndex = 0;
+
+        itemAdderTool = new ItemAdderTools(this);
 
         // Image items.
         imagePanel = new JPanel();
@@ -91,18 +97,10 @@ public class ItemAdderPanel extends JPanel {
 
 
         harvestLevel_textField = new JTextField();
-        harvestLevel_textField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                harvestLevel_textFieldActionPerformed(evt);
-            }
-        });
+        harvestLevel_textField.addActionListener(this::harvestLevel_textFieldActionPerformed);
 
         modDirectory_textField.setText(modDirectory);
-        modDirectory_textField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                modDirectory_textFieldActionPerformed(evt);
-            }
-        });
+        modDirectory_textField.addActionListener(this::modDirectory_textFieldActionPerformed);
 
         jLabel1.setText("Mod Directory:");
 
@@ -127,46 +125,39 @@ public class ItemAdderPanel extends JPanel {
         imagePanel.setVisible(true);
         this.add(imagePanel);
         unusedDirectory_textField.setText(unusedDirectory);
-        unusedDirectory_textField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                unusedDirectory_textFieldActionPerformed(evt);
-            }
-        });
+        unusedDirectory_textField.addActionListener(this::unusedDirectory_textFieldActionPerformed);
 
         jLabel2.setText("Unused Textures:");
 
         usedDirectory_textField.setText(usedDirectory);
-        usedDirectory_textField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                usedDirectory_textFieldActionPerformed(evt);
-            }
-        });
+        usedDirectory_textField.addActionListener(this::usedDirectory_textFieldActionPerformed);
 
         jLabel3.setText("Used Textures:");
 
         skippedDirectory_textField.setText(skippedDirectory);
-        skippedDirectory_textField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                skippedDirectory_textFieldActionPerformed(evt);
-            }
-        });
+        skippedDirectory_textField.addActionListener(this::skippedDirectory_textFieldActionPerformed);
 
         jLabel4.setText("Skipped Textures:");
 
         jLabel5.setText("Currently Parsed Texture:");
 
         generateCode_button.setText("Generate Code");
-        generateCode_button.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                try {
-                    generateCode_buttonActionPerformed(evt);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+        generateCode_button.addActionListener(evt -> {
+            try {
+                generateCode_buttonActionPerformed(evt);
+            } catch (IOException e) {
+                e.printStackTrace();
             }
         });
 
         skip_button.setText("Skip");
+        skip_button.addActionListener(evt -> {
+            try {
+                skip_buttonActionPerformed(evt);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
 
         jLabel6.setText("texture_name");
 
@@ -183,45 +174,39 @@ public class ItemAdderPanel extends JPanel {
         jLabel12.setText("Material:");
 
         hardness_textField.setText("1.5");
-        hardness_textField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                hardness_textFieldActionPerformed(evt);
-            }
-        });
+        hardness_textField.addActionListener(this::hardness_textFieldActionPerformed);
 
         resistance_textField.setText("6.0");
-        resistance_textField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                resistance_textFieldActionPerformed(evt);
-            }
-        });
+        resistance_textField.addActionListener(this::resistance_textFieldActionPerformed);
 
         // The units on this value are in tenths. The slider supports integers but hardness can be much smaller.
         resistance_slider.setMaximum(12000);
         resistance_slider.setToolTipText("");
         resistance_slider.setValue(60);
+        resistance_slider.addChangeListener(this::resistance_sliderChangePerformed);
 
         // The units on this value are in tenths. The slider supports integers but hardness can be much smaller.
         hardness_slider.setMaximum(500);
         hardness_slider.setToolTipText("");
         hardness_slider.setValue(15);
+        hardness_slider.addChangeListener(this::hardness_sliderChangePerformed);
 
         material_ComboBox.setModel(new DefaultComboBoxModel<>(new String[]{"AIR", "STRUCTURE_VOID", "PORTAL", "CARPET", "PLANTS", "OCEAN_PLANT", "TALL_PLANTS", "SEA_GRASS", "WATER", "BUBBLE_COLUMN", "LAVA", "SNOW", "FIRE", "MISCELLANEOUS", "WEB", "REDSTONE_LIGHT", "CLAY", "EARTH", "ORGANIC", "PACKED_ICE", "SAND", "SPONGE", "SHULKER", "WOOD", "BAMBOO_SAPLING", "BAMBOO", "WOOL", "TNT", "LEAVES", "GLASS", "ICE", "CACTUS", "ROCK", "IRON", "SNOW_BLOCK", "ANVIL", "BARRIER", "PISTON", "CORAL", "GOURD", "DRAGON_EGG", "CAKE"}));
+        material_ComboBox.setSelectedIndex(32);
 
         sound_ComboBox.setModel(new DefaultComboBoxModel<>(new String[]{"NONE", "WOOD", "GROUND", "PLANT", "STONE", "METAL", "GLASS", "CLOTH", "SAND", "SNOW", "LADDER", "ANVIL", "SLIME", "field_226947_m_", "WET_GRASS", "CORAL", "BAMBOO", "BAMBOO_SAPLING", "SCAFFOLDING", "SWEET_BERRY_BUSH", "CROP", "STEM", "NETHER_WART", "LANTERN"}));
+        sound_ComboBox.setSelectedIndex(4);
 
         harvestLevel_textField.setText("1");
-        harvestLevel_textField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                harvestLevel_textFieldActionPerformed(evt);
-            }
-        });
+        harvestLevel_textField.addActionListener(this::harvestLevel_textFieldActionPerformed);
 
         harvestLevel_slider.setMaximum(3);
         harvestLevel_slider.setToolTipText("");
         harvestLevel_slider.setValue(1);
+        harvestLevel_slider.addChangeListener(this::harvestLevel_sliderChangePerformed);
 
         harvestTool_ComboBox.setModel(new DefaultComboBoxModel<>(new String[]{"NONE", "AXE", "PICKAXE", "SHOVEL"}));
+        harvestTool_ComboBox.setSelectedIndex(2);
 
         GroupLayout layout = new GroupLayout(this);
         this.setLayout(layout);
@@ -347,7 +332,6 @@ public class ItemAdderPanel extends JPanel {
                                         .addComponent(generateCode_button))
                                 .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-        displayImage(filesToParse.get(0));
     }
 
     // This will return the selected material value.
@@ -423,45 +407,57 @@ public class ItemAdderPanel extends JPanel {
     private JTextField harvestLevel_textField;
 
     private void modDirectory_textFieldActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
+        modDirectory = modDirectory_textField.getText();
     }
 
     private void unusedDirectory_textFieldActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
+        unusedDirectory = unusedDirectory_textField.getText();
     }
 
     private void usedDirectory_textFieldActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
+        usedDirectory = usedDirectory_textField.getText();
     }
 
     private void skippedDirectory_textFieldActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
+        skippedDirectory = skippedDirectory_textField.getText();
     }
 
     private void hardness_textFieldActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
+        hardness_slider.setValue(Integer.parseInt(hardness_textField.getText())*10);
+    }
+
+    private void harvestLevel_sliderChangePerformed(ChangeEvent evt){
+        harvestLevel_textField.setText(String.valueOf(harvestLevel_slider.getValue()));
+    }
+
+    private void hardness_sliderChangePerformed(ChangeEvent evt){
+        hardness_textField.setText(String.valueOf(hardness_slider.getValue()/10.0));
+    }
+
+    private void resistance_sliderChangePerformed(ChangeEvent evt){
+        resistance_textField.setText(String.valueOf(resistance_slider.getValue()/10.0));
     }
 
     private void resistance_textFieldActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
+        resistance_slider.setValue(Integer.parseInt(resistance_textField.getText())*10);
     }
 
     private void harvestLevel_textFieldActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
+        harvestLevel_slider.setValue(Integer.parseInt(harvestLevel_textField.getText()));
     }
 
-    private int testCount;
     private void generateCode_buttonActionPerformed(java.awt.event.ActionEvent evt) throws IOException {
-        // TODO add your handling code here:
+        itemAdderTool.update();
+        itemAdderTool.AddFullBlock();
+        currentFileIndex++;
+        displayImage(filesToParse.get(currentFileIndex));
+    }
 
-        // For testing.
-        if (testCount == 0) {
-            displayImage(filesToParse.get(1));
-            testCount = 1;
-        } else if (testCount == 1){
-            displayImage(filesToParse.get(0));
-            testCount = 0;
-        }
+    private void skip_buttonActionPerformed(java.awt.event.ActionEvent evt) throws IOException {
+        itemAdderTool.update();
+        itemAdderTool.skipTextures();
+        currentFileIndex++;
+        displayImage(filesToParse.get(currentFileIndex));
     }
 
     private void displayImage(File file) throws IOException {

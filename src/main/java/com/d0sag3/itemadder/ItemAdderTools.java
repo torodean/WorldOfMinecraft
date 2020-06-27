@@ -11,14 +11,13 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Scanner;
 
 /**
  * This class contains various tools used by the other ItemAdder Classes.
  */
 public class ItemAdderTools {
 
-    // Variables stored in this class.
-    private String itemName;
     private String blockName;
     private String fileName;
     ItemAdderPanel mainPanel;
@@ -26,13 +25,15 @@ public class ItemAdderTools {
     // Main constructor for the ItemAdderTools class.
     ItemAdderTools(ItemAdderPanel panel){
         mainPanel = panel;
-        init();
+        update();
     }
 
     // Initializes the information for this class.
-    private void init(){
-        fileName = mainPanel.currentFile.getName();
-        itemName = fileName.substring(0, fileName.length() - 4);
+    // Must be used after each call to AddFullBlock() or skipBlock().
+    public void update(){
+        fileName = mainPanel.filesToParse.get(mainPanel.currentFileIndex).getName();
+        // Variables stored in this class.
+        String itemName = fileName.substring(0, fileName.length() - 4);
         blockName = itemName + "_block";
     }
 
@@ -53,14 +54,23 @@ public class ItemAdderTools {
 
     // This returns the name of the item as shown in Minecraft.
     public String getBlockNameProper(){
-        //TODO - This won't work because I can't get it to compile with my added jar.
-//        return WordUtils.capitalizeFully(blockName.replaceAll("_", "\\s"));
-        return "";
+        StringBuilder properBlockName = new StringBuilder();
+        Scanner scan = new Scanner(blockName);
+
+        while(scan.hasNext()) {
+            String word = scan.next();
+            properBlockName.append(Character.toUpperCase(word.charAt(0))).append(word.substring(1)).append(" ");
+        }
+
+        return properBlockName.toString();
+
+        // This won't work because I can't get it to compile with my added jar. Pity.
+        // return WordUtils.capitalizeFully(blockName.replaceAll("_", "\\s"));
     }
 
     // This returns the name of the item as shown in Minecraft.
     public String getBlockNameClass(){
-        return getBlockNameProper().replaceAll("\\s", "");
+        return getBlockNameProper().replaceAll("\\s", "").trim();
     }
 
     // This is the text to be added into the block states file.
@@ -128,6 +138,16 @@ public class ItemAdderTools {
 
     // This is the text to create the new block class.
     public String getBlockClassText(){
+        String soundComponent = "";
+        String harvestToolComponent = "";
+        if (mainPanel.getSound_ComboBoxValue().equals("NONE")) {
+            soundComponent = "                .sound(SoundType." + mainPanel.getSound_ComboBoxValue() + ")\n";
+        }
+        if (mainPanel.getHarvestTool_ComboBoxValue().equals("NONE")) {
+            harvestToolComponent = "                .harvestTool(ToolType." + mainPanel.getHarvestTool_ComboBoxValue() + ")\n";
+        }
+
+
         return "package com.d0sag3.warcraftitems.blocks;\n" +
                 "\n" +
                 "import net.minecraft.block.Block;\n" +
@@ -140,9 +160,9 @@ public class ItemAdderTools {
                 "    public " + getBlockNameClass() + "() {\n" +
                 "        super(Block.Properties.create(Material." + mainPanel.getMaterial_ComboBoxValue() + ")\n" +
                 "                .hardnessAndResistance(" + mainPanel.getHardnessValue() + "f, " + mainPanel.getResistanceValue() + "f)\n" +
-                "                .sound(SoundType." + mainPanel.getSound_ComboBoxValue() + ")\n" +
+                soundComponent +
                 "                .harvestLevel(" + mainPanel.getHarvestLevelValue() + ")\n" +
-                "                .harvestTool(ToolType." + mainPanel.getHarvestTool_ComboBoxValue() + ")\n" +
+                harvestToolComponent +
                 "        );\n" +
                 "    }\n" +
                 "}";
@@ -150,7 +170,7 @@ public class ItemAdderTools {
 
     // Creates the block class with the appropriate code.
     public void addBlockClass(){
-        String blockClassFile = mainPanel.modDirectory + "\\src\\main\\java\\com\\d0sag3\\warcraftitems\\blocks" + getBlockNameClass() + ".java";
+        String blockClassFile = mainPanel.modDirectory + "\\src\\main\\java\\com\\d0sag3\\warcraftitems\\blocks\\" + getBlockNameClass() + ".java";
         createFile(blockClassFile);
         writeToFile(blockClassFile, getBlockClassText());
     }
@@ -162,12 +182,37 @@ public class ItemAdderTools {
 
     // This will add the appropriate text for the new block to the Registry Handler.
     public void addRegistryHandlerText() throws IOException {
-        Path path = Paths.get(mainPanel.modDirectory + "\\src\\main\\java\\com\\d0sag3\\warcraftitems\\util");
+        Path path = Paths.get(mainPanel.modDirectory + "\\src\\main\\java\\com\\d0sag3\\warcraftitems\\util\\RegistryHandler.java");
         Charset charset = StandardCharsets.UTF_8;
 
         String content = new String(Files.readAllBytes(path), charset);
         content = content.replaceAll("// Blocks\n", "// Blocks\n" + getRegistryHandlerText());
         Files.write(path, content.getBytes(charset));
+    }
+
+    // This is the text needed to add a block to the loot table.
+    public String getLootTableText(){
+        return "{\n" +
+                "  \"type\": \"minecraft:block\",\n" +
+                "  \"pools\": [\n" +
+                "    {\n" +
+                "      \"rolls\": 1,\n" +
+                "      \"entries\": [\n" +
+                "        {\n" +
+                "          \"type\": \"minecraft:item\",\n" +
+                "          \"name\": \"warcraftitems:" + getBlockName() + "\"\n" +
+                "        }\n" +
+                "      ]\n" +
+                "    }\n" +
+                "  ]\n" +
+                "}";
+    }
+
+    // This will add the block to the loot tables by creating the appropriate json file.
+    public void addLootTableFile(){
+        String lootTableFile = mainPanel.modDirectory + "\\src\\main\\resources\\data\\warcraftitems\\loot_tables\\blocks\\" + blockName + ".json";
+        createFile(lootTableFile);
+        writeToFile(lootTableFile, getLootTableText());
     }
 
     // This will add the code required to add a full block to the list.
@@ -178,6 +223,20 @@ public class ItemAdderTools {
         addItemModelFile();
         addLangAddition();
         addRegistryHandlerText();
+        addLootTableFile();
+        addTextures();
+    }
+
+    public void addTextures() throws IOException {
+        Path path = Paths.get(mainPanel.modDirectory + "\\textures_unconverted\\" + getFileName());
+        Files.copy(path, Paths.get(mainPanel.modDirectory + "\\src\\main\\resources\\assets\\warcraftitems\\textures\\blocks\\" + getFileName()));
+        Files.copy(path, Paths.get(mainPanel.modDirectory + "\\src\\main\\resources\\assets\\warcraftitems\\textures\\items\\" + getFileName()));
+        Files.move(path, Paths.get(mainPanel.usedDirectory + "\\" + getFileName()));
+    }
+
+    public void skipTextures() throws IOException {
+        Path path = Paths.get(mainPanel.modDirectory + "\\textures_unconverted\\" + getFileName());
+        Files.move(path, Paths.get(mainPanel.skippedDirectory + "\\" + getFileName()));
     }
 
     // Creates a file.
