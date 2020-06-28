@@ -51,6 +51,14 @@ public class ItemAdderPanel extends JPanel {
     ItemAdderTools itemAdderTool;
     public int currentFileIndex;
 
+    private ImageIcon getScaledIcon(String file){
+        ImageIcon icon = new ImageIcon(file);
+        Image image = icon.getImage();
+        Image scaledImage = image.getScaledInstance(40, 40,  Image.SCALE_SMOOTH);
+        icon = new ImageIcon(scaledImage);
+        return icon;
+    }
+
     @SuppressWarnings("unchecked")
     private void initComponents() throws IOException {
 
@@ -62,6 +70,8 @@ public class ItemAdderPanel extends JPanel {
         currentFileIndex = 0;
 
         itemAdderTool = new ItemAdderTools(this);
+        output_TextArea = new JTextArea();
+        output_ScrollPane = new JScrollPane();
 
         // Image items.
         imagePanel = new JPanel();
@@ -69,23 +79,23 @@ public class ItemAdderPanel extends JPanel {
         imageIconLabel = new JLabel();
 
         modDirectory_textField = new JTextField();
-        jLabel1 = new JLabel();
+        modDir_label = new JLabel();
         unusedDirectory_textField = new JTextField();
-        jLabel2 = new JLabel();
+        unusedDir_label = new JLabel();
         usedDirectory_textField = new JTextField();
-        jLabel3 = new JLabel();
+        usedDir_label = new JLabel();
         skippedDirectory_textField = new JTextField();
-        jLabel4 = new JLabel();
-        jLabel5 = new JLabel();
+        skippedDir_label = new JLabel();
+        currentImage_label = new JLabel();
         generateCode_button = new JButton();
         skip_button = new JButton();
         current_texture = new JLabel();
-        jLabel7 = new JLabel();
-        jLabel8 = new JLabel();
-        jLabel9 = new JLabel();
-        jLabel10 = new JLabel();
-        jLabel11 = new JLabel();
-        jLabel12 = new JLabel();
+        hardness_label = new JLabel();
+        resistance_label = new JLabel();
+        sound_label = new JLabel();
+        harvest_label = new JLabel();
+        harvestTool_label = new JLabel();
+        material_label = new JLabel();
         hardness_textField = new JTextField();
         resistance_textField = new JTextField();
         resistance_slider = new JSlider();
@@ -95,6 +105,65 @@ public class ItemAdderPanel extends JPanel {
         harvestLevel_slider = new JSlider();
         harvestTool_ComboBox = new JComboBox<>();
 
+        output_TextArea.setColumns(20);
+        output_TextArea.setRows(5);
+        output_ScrollPane.setViewportView(output_TextArea);
+
+        ImageIcon dirt_block = getScaledIcon(modDirectory + "\\ui_elements\\dirt_block.png");
+        icon1 = new JButton(dirt_block);
+        icon1.setHorizontalTextPosition(SwingConstants.CENTER);
+
+        ImageIcon sand_block = getScaledIcon(modDirectory + "\\ui_elements\\sand_block.png");
+        icon2 = new JButton(sand_block);
+        icon2.setHorizontalTextPosition(SwingConstants.CENTER);
+
+        ImageIcon wool_block = getScaledIcon(modDirectory + "\\ui_elements\\wool_block.png");
+        icon3 = new JButton(wool_block);
+        icon3.setHorizontalTextPosition(SwingConstants.CENTER);
+
+        ImageIcon stone_block = getScaledIcon(modDirectory + "\\ui_elements\\stone_block.png");
+        icon4 = new JButton(stone_block);
+        icon4.setHorizontalTextPosition(SwingConstants.CENTER);
+
+        ImageIcon log_block = getScaledIcon(modDirectory + "\\ui_elements\\log_block.png");
+        icon7 = new JButton(log_block);
+        icon7.setHorizontalTextPosition(SwingConstants.CENTER);
+
+        ImageIcon gold_block = getScaledIcon(modDirectory + "\\ui_elements\\gold_block.png");
+        icon5 = new JButton(gold_block);
+        icon5.setHorizontalTextPosition(SwingConstants.CENTER);
+
+        ImageIcon obsidian_block = getScaledIcon(modDirectory + "\\ui_elements\\obsidian_block.png");
+        icon6 = new JButton(obsidian_block);
+        icon6.setHorizontalTextPosition(SwingConstants.CENTER);
+
+        ImageIcon glass_block = getScaledIcon(modDirectory + "\\ui_elements\\glass_block.png");
+        icon8 = new JButton(glass_block);
+        icon8.setHorizontalTextPosition(SwingConstants.CENTER);
+
+        icon9 = new JButton();
+        icon9.setHorizontalTextPosition(SwingConstants.CENTER);
+
+        icon10 = new JButton();
+        icon10.setHorizontalTextPosition(SwingConstants.CENTER);
+
+        icon11 = new JButton();
+        icon11.setHorizontalTextPosition(SwingConstants.CENTER);
+
+        icon12 = new JButton();
+        icon12.setHorizontalTextPosition(SwingConstants.CENTER);
+
+        icon13 = new JButton();
+        icon13.setHorizontalTextPosition(SwingConstants.CENTER);
+
+        icon14 = new JButton();
+        icon14.setHorizontalTextPosition(SwingConstants.CENTER);
+
+        icon15 = new JButton();
+        icon15.setHorizontalTextPosition(SwingConstants.CENTER);
+
+        icon16 = new JButton();
+        icon16.setHorizontalTextPosition(SwingConstants.CENTER);
 
         harvestLevel_textField = new JTextField();
         harvestLevel_textField.addActionListener(this::harvestLevel_textFieldActionPerformed);
@@ -102,7 +171,7 @@ public class ItemAdderPanel extends JPanel {
         modDirectory_textField.setText(modDirectory);
         modDirectory_textField.addActionListener(this::modDirectory_textFieldActionPerformed);
 
-        jLabel1.setText("Mod Directory:");
+        modDir_label.setText("Mod Directory:");
 
         imagePanel.setBorder(BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         imagePanel.setPreferredSize(new java.awt.Dimension(256, 256));
@@ -116,30 +185,30 @@ public class ItemAdderPanel extends JPanel {
         imagePanel.setLayout(imagePanelLayout);
         imagePanelLayout.setHorizontalGroup(
                 imagePanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                        .addComponent(imageIconLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 256, Short.MAX_VALUE)
+                        .addComponent(imageIconLabel, GroupLayout.DEFAULT_SIZE, 256, Short.MAX_VALUE)
         );
         imagePanelLayout.setVerticalGroup(
                 imagePanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                        .addComponent(imageIconLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 256, Short.MAX_VALUE)
+                        .addComponent(imageIconLabel, GroupLayout.DEFAULT_SIZE, 256, Short.MAX_VALUE)
         );
         imagePanel.setVisible(true);
         this.add(imagePanel);
         unusedDirectory_textField.setText(unusedDirectory);
         unusedDirectory_textField.addActionListener(this::unusedDirectory_textFieldActionPerformed);
 
-        jLabel2.setText("Unused Textures:");
+        unusedDir_label.setText("Unused Textures:");
 
         usedDirectory_textField.setText(usedDirectory);
         usedDirectory_textField.addActionListener(this::usedDirectory_textFieldActionPerformed);
 
-        jLabel3.setText("Used Textures:");
+        usedDir_label.setText("Used Textures:");
 
         skippedDirectory_textField.setText(skippedDirectory);
         skippedDirectory_textField.addActionListener(this::skippedDirectory_textFieldActionPerformed);
 
-        jLabel4.setText("Skipped Textures:");
+        skippedDir_label.setText("Skipped Textures:");
 
-        jLabel5.setText("Currently Parsed Texture:");
+        currentImage_label.setText("Currently Parsed Texture:");
 
         generateCode_button.setText("Generate Code");
         generateCode_button.addActionListener(evt -> {
@@ -161,17 +230,17 @@ public class ItemAdderPanel extends JPanel {
 
         current_texture.setText("texture_name");
 
-        jLabel7.setText("Hardness:");
+        hardness_label.setText("Hardness:");
 
-        jLabel8.setText("Resistance:");
+        resistance_label.setText("Resistance:");
 
-        jLabel9.setText("Sound Type:");
+        sound_label.setText("Sound Type:");
 
-        jLabel10.setText("Harvest Level:");
+        harvest_label.setText("Harvest Level:");
 
-        jLabel11.setText("Harvest Tool:");
+        harvestTool_label.setText("Harvest Tool:");
 
-        jLabel12.setText("Material:");
+        material_label.setText("Material:");
 
         hardness_textField.setText("1.5");
         hardness_textField.addActionListener(this::hardness_textFieldActionPerformed);
@@ -208,6 +277,102 @@ public class ItemAdderPanel extends JPanel {
         harvestTool_ComboBox.setModel(new DefaultComboBoxModel<>(new String[]{"NONE", "AXE", "PICKAXE", "SHOVEL"}));
         harvestTool_ComboBox.setSelectedIndex(2);
 
+        icon12.setText("");
+        icon12.setMaximumSize(new Dimension(40, 40));
+        icon12.setMinimumSize(new Dimension(40, 40));
+        icon12.setPreferredSize(new Dimension(40, 40));
+        icon12.addActionListener(this::icon12_buttonActionPerformed);
+
+        icon1.setText("");
+        icon1.setMaximumSize(new Dimension(40, 40));
+        icon1.setMinimumSize(new Dimension(40, 40));
+        icon1.setPreferredSize(new Dimension(40, 40));
+        icon1.addActionListener(this::icon1_buttonActionPerformed);
+
+        icon2.setText("");
+        icon2.setMaximumSize(new Dimension(40, 40));
+        icon2.setMinimumSize(new Dimension(40, 40));
+        icon2.setPreferredSize(new Dimension(40, 40));
+        icon2.addActionListener(this::icon2_buttonActionPerformed);
+
+        icon3.setText("");
+        icon3.setMaximumSize(new Dimension(40, 40));
+        icon3.setMinimumSize(new Dimension(40, 40));
+        icon3.setPreferredSize(new Dimension(40, 40));
+        icon3.addActionListener(this::icon3_buttonActionPerformed);
+
+        icon4.setText("");
+        icon4.setMaximumSize(new Dimension(40, 40));
+        icon4.setMinimumSize(new Dimension(40, 40));
+        icon4.setPreferredSize(new Dimension(40, 40));
+        icon4.addActionListener(this::icon4_buttonActionPerformed);
+
+        icon5.setText("");
+        icon5.setMaximumSize(new Dimension(40, 40));
+        icon5.setMinimumSize(new Dimension(40, 40));
+        icon5.setPreferredSize(new Dimension(40, 40));
+        icon5.addActionListener(this::icon5_buttonActionPerformed);
+
+        icon6.setText("");
+        icon6.setMaximumSize(new Dimension(40, 40));
+        icon6.setMinimumSize(new Dimension(40, 40));
+        icon6.setPreferredSize(new Dimension(40, 40));
+        icon6.addActionListener(this::icon6_buttonActionPerformed);
+
+        icon7.setText("");
+        icon7.setMaximumSize(new Dimension(40, 40));
+        icon7.setMinimumSize(new Dimension(40, 40));
+        icon7.setPreferredSize(new Dimension(40, 40));
+        icon7.addActionListener(this::icon7_buttonActionPerformed);
+
+        icon8.setText("");
+        icon8.setMaximumSize(new Dimension(40, 40));
+        icon8.setMinimumSize(new Dimension(40, 40));
+        icon8.setPreferredSize(new Dimension(40, 40));
+        icon8.addActionListener(this::icon8_buttonActionPerformed);
+
+        icon9.setText("");
+        icon9.setMaximumSize(new Dimension(40, 40));
+        icon9.setMinimumSize(new Dimension(40, 40));
+        icon9.setPreferredSize(new Dimension(40, 40));
+        icon9.addActionListener(this::icon9_buttonActionPerformed);
+
+        icon10.setText("");
+        icon10.setMaximumSize(new Dimension(40, 40));
+        icon10.setMinimumSize(new Dimension(40, 40));
+        icon10.setPreferredSize(new Dimension(40, 40));
+        icon10.addActionListener(this::icon10_buttonActionPerformed);
+
+        icon11.setText("");
+        icon11.setMaximumSize(new Dimension(40, 40));
+        icon11.setMinimumSize(new Dimension(40, 40));
+        icon11.setPreferredSize(new Dimension(40, 40));
+        icon11.addActionListener(this::icon11_buttonActionPerformed);
+
+        icon13.setText("");
+        icon13.setMaximumSize(new Dimension(40, 40));
+        icon13.setMinimumSize(new Dimension(40, 40));
+        icon13.setPreferredSize(new Dimension(40, 40));
+        icon13.addActionListener(this::icon13_buttonActionPerformed);
+
+        icon14.setText("");
+        icon14.setMaximumSize(new Dimension(40, 40));
+        icon14.setMinimumSize(new Dimension(40, 40));
+        icon14.setPreferredSize(new Dimension(40, 40));
+        icon14.addActionListener(this::icon14_buttonActionPerformed);
+
+        icon15.setText("");
+        icon15.setMaximumSize(new Dimension(40, 40));
+        icon15.setMinimumSize(new Dimension(40, 40));
+        icon15.setPreferredSize(new Dimension(40, 40));
+        icon1.addActionListener(this::icon15_buttonActionPerformed);
+
+        icon16.setText("");
+        icon16.setMaximumSize(new Dimension(40, 40));
+        icon16.setMinimumSize(new Dimension(40, 40));
+        icon16.setPreferredSize(new Dimension(40, 40));
+        icon16.addActionListener(this::icon16_buttonActionPerformed);
+
         GroupLayout layout = new GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -215,57 +380,91 @@ public class ItemAdderPanel extends JPanel {
                         .addGroup(layout.createSequentialGroup()
                                 .addContainerGap()
                                 .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                                        .addGroup(layout.createSequentialGroup()
-                                                .addComponent(jLabel5)
-                                                .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
-                                                .addComponent(current_texture, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                        .addGroup(layout.createSequentialGroup()
+                                        .addComponent(output_ScrollPane)
+                                        .addGroup(GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                                 .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                                                        .addGroup(layout.createSequentialGroup()
-                                                                .addGroup(layout.createParallelGroup(GroupLayout.Alignment.TRAILING, false)
-                                                                        .addGroup(layout.createSequentialGroup()
-                                                                                .addComponent(generateCode_button, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                                                .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
-                                                                                .addComponent(skip_button))
-                                                                        .addComponent(imagePanel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-                                                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                                                                .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                                                                        .addComponent(jLabel7)
-                                                                        .addComponent(jLabel12)
-                                                                        .addComponent(jLabel8)
-                                                                        .addComponent(jLabel9)
-                                                                        .addComponent(jLabel10)
-                                                                        .addComponent(jLabel11))
-                                                                .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
-                                                                .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
-                                                                        .addGroup(layout.createSequentialGroup()
-                                                                                .addComponent(hardness_textField, GroupLayout.PREFERRED_SIZE, 70, GroupLayout.PREFERRED_SIZE)
-                                                                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                                                                                .addComponent(hardness_slider, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-                                                                        .addComponent(material_ComboBox, 0, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                                        .addGroup(layout.createSequentialGroup()
-                                                                                .addComponent(resistance_textField, GroupLayout.PREFERRED_SIZE, 70, GroupLayout.PREFERRED_SIZE)
-                                                                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                                                                                .addComponent(resistance_slider, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-                                                                        .addComponent(sound_ComboBox, 0, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                                        .addGroup(layout.createSequentialGroup()
-                                                                                .addComponent(harvestLevel_textField, GroupLayout.PREFERRED_SIZE, 70, GroupLayout.PREFERRED_SIZE)
-                                                                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                                                                                .addComponent(harvestLevel_slider, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-                                                                        .addComponent(harvestTool_ComboBox, 0, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                                                        .addGroup(layout.createSequentialGroup()
-                                                                .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                                                                        .addComponent(jLabel2)
-                                                                        .addComponent(jLabel1)
-                                                                        .addComponent(jLabel3)
-                                                                        .addComponent(jLabel4))
-                                                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                                                                .addGroup(layout.createParallelGroup(GroupLayout.Alignment.TRAILING, false)
-                                                                        .addComponent(unusedDirectory_textField, GroupLayout.Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 555, Short.MAX_VALUE)
-                                                                        .addComponent(usedDirectory_textField, GroupLayout.Alignment.LEADING)
-                                                                        .addComponent(skippedDirectory_textField, GroupLayout.Alignment.LEADING)
-                                                                        .addComponent(modDirectory_textField))))
-                                                .addGap(0, 0, Short.MAX_VALUE)))
+                                                        .addComponent(unusedDir_label)
+                                                        .addComponent(modDir_label)
+                                                        .addComponent(usedDir_label)
+                                                        .addComponent(skippedDir_label))
+                                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                                                .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                                                        .addComponent(usedDirectory_textField)
+                                                        .addComponent(unusedDirectory_textField)
+                                                        .addComponent(modDirectory_textField)
+                                                        .addComponent(skippedDirectory_textField)))
+                                        .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                                                .addGroup(layout.createSequentialGroup()
+                                                        .addGroup(layout.createParallelGroup(GroupLayout.Alignment.TRAILING, false)
+                                                                .addGroup(layout.createSequentialGroup()
+                                                                        .addComponent(generateCode_button, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                                        .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
+                                                                        .addComponent(skip_button))
+                                                                .addComponent(imagePanel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                                                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                                                        .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                                                                .addGroup(layout.createSequentialGroup()
+                                                                        .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                                                                                .addComponent(icon9, GroupLayout.PREFERRED_SIZE, 40, GroupLayout.PREFERRED_SIZE)
+                                                                                .addComponent(icon1, GroupLayout.PREFERRED_SIZE, 40, GroupLayout.PREFERRED_SIZE))
+                                                                        .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
+                                                                        .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                                                                                .addComponent(icon10, GroupLayout.PREFERRED_SIZE, 40, GroupLayout.PREFERRED_SIZE)
+                                                                                .addComponent(icon2, GroupLayout.PREFERRED_SIZE, 40, GroupLayout.PREFERRED_SIZE))
+                                                                        .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
+                                                                        .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                                                                                .addComponent(icon11, GroupLayout.PREFERRED_SIZE, 40, GroupLayout.PREFERRED_SIZE)
+                                                                                .addComponent(icon3, GroupLayout.PREFERRED_SIZE, 40, GroupLayout.PREFERRED_SIZE))
+                                                                        .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
+                                                                        .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                                                                                .addComponent(icon12, GroupLayout.PREFERRED_SIZE, 40, GroupLayout.PREFERRED_SIZE)
+                                                                                .addComponent(icon4, GroupLayout.PREFERRED_SIZE, 40, GroupLayout.PREFERRED_SIZE))
+                                                                        .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
+                                                                        .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                                                                                .addComponent(icon13, GroupLayout.PREFERRED_SIZE, 40, GroupLayout.PREFERRED_SIZE)
+                                                                                .addComponent(icon5, GroupLayout.PREFERRED_SIZE, 40, GroupLayout.PREFERRED_SIZE))
+                                                                        .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
+                                                                        .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                                                                                .addComponent(icon14, GroupLayout.PREFERRED_SIZE, 40, GroupLayout.PREFERRED_SIZE)
+                                                                                .addComponent(icon6, GroupLayout.PREFERRED_SIZE, 40, GroupLayout.PREFERRED_SIZE))
+                                                                        .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
+                                                                        .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                                                                                .addComponent(icon15, GroupLayout.PREFERRED_SIZE, 40, GroupLayout.PREFERRED_SIZE)
+                                                                                .addComponent(icon7, GroupLayout.PREFERRED_SIZE, 40, GroupLayout.PREFERRED_SIZE))
+                                                                        .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
+                                                                        .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                                                                                .addComponent(icon16, GroupLayout.PREFERRED_SIZE, 40, GroupLayout.PREFERRED_SIZE)
+                                                                                .addComponent(icon8, GroupLayout.PREFERRED_SIZE, 40, GroupLayout.PREFERRED_SIZE)))
+                                                                .addGroup(layout.createSequentialGroup()
+                                                                        .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                                                                                .addComponent(hardness_label)
+                                                                                .addComponent(material_label)
+                                                                                .addComponent(resistance_label)
+                                                                                .addComponent(sound_label)
+                                                                                .addComponent(harvest_label)
+                                                                                .addComponent(harvestTool_label))
+                                                                        .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
+                                                                        .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
+                                                                                .addGroup(layout.createSequentialGroup()
+                                                                                        .addComponent(hardness_textField, GroupLayout.PREFERRED_SIZE, 70, GroupLayout.PREFERRED_SIZE)
+                                                                                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                                                                                        .addComponent(hardness_slider, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                                                                .addComponent(material_ComboBox, 0, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                                                .addGroup(layout.createSequentialGroup()
+                                                                                        .addComponent(resistance_textField, GroupLayout.PREFERRED_SIZE, 70, GroupLayout.PREFERRED_SIZE)
+                                                                                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                                                                                        .addComponent(resistance_slider, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                                                                .addComponent(sound_ComboBox, 0, 316, Short.MAX_VALUE)
+                                                                                .addGroup(layout.createSequentialGroup()
+                                                                                        .addComponent(harvestLevel_textField, GroupLayout.PREFERRED_SIZE, 70, GroupLayout.PREFERRED_SIZE)
+                                                                                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                                                                                        .addComponent(harvestLevel_slider, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                                                                .addComponent(harvestTool_ComboBox, 0, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                                                        .addGap(0, 0, Short.MAX_VALUE))
+                                                .addGroup(layout.createSequentialGroup()
+                                                        .addComponent(currentImage_label)
+                                                        .addGap(18, 18, 18)
+                                                        .addComponent(current_texture, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -274,33 +473,38 @@ public class ItemAdderPanel extends JPanel {
                                 .addContainerGap()
                                 .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
                                         .addComponent(modDirectory_textField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(jLabel1))
+                                        .addComponent(modDir_label))
                                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
                                         .addComponent(unusedDirectory_textField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(jLabel2))
+                                        .addComponent(unusedDir_label))
                                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
                                         .addComponent(usedDirectory_textField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(jLabel3))
+                                        .addComponent(usedDir_label))
                                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
                                         .addComponent(skippedDirectory_textField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(jLabel4))
+                                        .addComponent(skippedDir_label))
                                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                                        .addComponent(jLabel5)
+                                        .addComponent(currentImage_label)
                                         .addComponent(current_texture))
                                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                                        .addComponent(imagePanel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                                         .addGroup(layout.createSequentialGroup()
+                                                .addComponent(imagePanel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                                                .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                                                        .addComponent(skip_button)
+                                                        .addComponent(generateCode_button)))
+                                        .addGroup(GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                                 .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
                                                         .addGroup(layout.createSequentialGroup()
-                                                                .addComponent(jLabel12)
+                                                                .addComponent(material_label)
                                                                 .addGap(18, 18, 18)
                                                                 .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                                                                        .addComponent(jLabel7)
+                                                                        .addComponent(hardness_label)
                                                                         .addComponent(hardness_textField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
                                                         .addGroup(layout.createSequentialGroup()
                                                                 .addComponent(material_ComboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
@@ -309,28 +513,60 @@ public class ItemAdderPanel extends JPanel {
                                                 .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
                                                 .addGroup(layout.createParallelGroup(GroupLayout.Alignment.TRAILING)
                                                         .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                                                                .addComponent(jLabel8)
+                                                                .addComponent(resistance_label)
                                                                 .addComponent(resistance_textField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
                                                         .addComponent(resistance_slider, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
                                                 .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
                                                 .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                                                        .addComponent(jLabel9)
+                                                        .addComponent(sound_label)
                                                         .addComponent(sound_ComboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
                                                 .addGap(15, 15, 15)
                                                 .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
                                                         .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
                                                                 .addComponent(harvestLevel_textField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                                                                .addComponent(jLabel10))
+                                                                .addComponent(harvest_label))
                                                         .addComponent(harvestLevel_slider, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
                                                 .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
                                                 .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                                                        .addComponent(jLabel11)
-                                                        .addComponent(harvestTool_ComboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))))
-                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                                        .addComponent(skip_button)
-                                        .addComponent(generateCode_button))
-                                .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                                        .addComponent(harvestTool_label)
+                                                        .addComponent(harvestTool_ComboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                                                .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                                                        .addGroup(layout.createSequentialGroup()
+                                                                .addComponent(icon1, GroupLayout.PREFERRED_SIZE, 40, GroupLayout.PREFERRED_SIZE)
+                                                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                                .addComponent(icon9, GroupLayout.PREFERRED_SIZE, 40, GroupLayout.PREFERRED_SIZE))
+                                                        .addGroup(layout.createSequentialGroup()
+                                                                .addComponent(icon2, GroupLayout.PREFERRED_SIZE, 40, GroupLayout.PREFERRED_SIZE)
+                                                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                                .addComponent(icon10, GroupLayout.PREFERRED_SIZE, 40, GroupLayout.PREFERRED_SIZE))
+                                                        .addGroup(layout.createSequentialGroup()
+                                                                .addComponent(icon3, GroupLayout.PREFERRED_SIZE, 40, GroupLayout.PREFERRED_SIZE)
+                                                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                                .addComponent(icon11, GroupLayout.PREFERRED_SIZE, 40, GroupLayout.PREFERRED_SIZE))
+                                                        .addGroup(layout.createSequentialGroup()
+                                                                .addComponent(icon4, GroupLayout.PREFERRED_SIZE, 40, GroupLayout.PREFERRED_SIZE)
+                                                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                                .addComponent(icon12, GroupLayout.PREFERRED_SIZE, 40, GroupLayout.PREFERRED_SIZE))
+                                                        .addGroup(layout.createSequentialGroup()
+                                                                .addComponent(icon5, GroupLayout.PREFERRED_SIZE, 40, GroupLayout.PREFERRED_SIZE)
+                                                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                                .addComponent(icon13, GroupLayout.PREFERRED_SIZE, 40, GroupLayout.PREFERRED_SIZE))
+                                                        .addGroup(layout.createSequentialGroup()
+                                                                .addComponent(icon6, GroupLayout.PREFERRED_SIZE, 40, GroupLayout.PREFERRED_SIZE)
+                                                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                                .addComponent(icon14, GroupLayout.PREFERRED_SIZE, 40, GroupLayout.PREFERRED_SIZE))
+                                                        .addGroup(layout.createSequentialGroup()
+                                                                .addComponent(icon7, GroupLayout.PREFERRED_SIZE, 40, GroupLayout.PREFERRED_SIZE)
+                                                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                                .addComponent(icon15, GroupLayout.PREFERRED_SIZE, 40, GroupLayout.PREFERRED_SIZE))
+                                                        .addGroup(layout.createSequentialGroup()
+                                                                .addComponent(icon8, GroupLayout.PREFERRED_SIZE, 40, GroupLayout.PREFERRED_SIZE)
+                                                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                                .addComponent(icon16, GroupLayout.PREFERRED_SIZE, 40, GroupLayout.PREFERRED_SIZE)))))
+                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 8, Short.MAX_VALUE)
+                                .addComponent(output_ScrollPane, GroupLayout.DEFAULT_SIZE, 242, Short.MAX_VALUE)
+                                .addContainerGap())
         );
     }
 
@@ -374,23 +610,46 @@ public class ItemAdderPanel extends JPanel {
     private JComboBox<String> harvestTool_ComboBox;
 
     // Lavel declarations.
-    private JLabel jLabel1;
-    private JLabel jLabel10;
-    private JLabel jLabel11;
-    private JLabel jLabel12;
-    private JLabel jLabel2;
-    private JLabel jLabel3;
-    private JLabel jLabel4;
-    private JLabel jLabel5;
+    private JLabel modDir_label;
+    private JLabel harvest_label;
+    private JLabel harvestTool_label;
+    private JLabel material_label;
+    private JLabel unusedDir_label;
+    private JLabel usedDir_label;
+    private JLabel skippedDir_label;
+    private JLabel currentImage_label;
     private JLabel current_texture;
-    private JLabel jLabel7;
-    private JLabel jLabel8;
-    private JLabel jLabel9;
+    private JLabel hardness_label;
+    private JLabel resistance_label;
+    private JLabel sound_label;
 
     // Panel declarations.
     private JPanel imagePanel;
     private ImageIcon imageIcon;
     private JLabel imageIconLabel;
+
+    // Output panel declarations.
+    private JTextArea output_TextArea;
+    private JScrollPane output_ScrollPane;
+
+    // The icons.
+    private JPanel iconPanel;
+    private JButton icon1;
+    private JButton icon2;
+    private JButton icon3;
+    private JButton icon4;
+    private JButton icon5;
+    private JButton icon6;
+    private JButton icon7;
+    private JButton icon8;
+    private JButton icon9;
+    private JButton icon10;
+    private JButton icon11;
+    private JButton icon12;
+    private JButton icon13;
+    private JButton icon14;
+    private JButton icon15;
+    private JButton icon16;
 
     // Slider declarations.
     private JSlider resistance_slider;
@@ -453,6 +712,139 @@ public class ItemAdderPanel extends JPanel {
         displayImage(filesToParse.get(currentFileIndex));
     }
 
+    private void updateSliders(){
+        hardness_slider.setValue(Integer.parseInt(hardness_label.getText())*10);
+        resistance_slider.setValue(Integer.parseInt(resistance_label.getText())*10);
+        harvestLevel_slider.setValue(Integer.parseInt(harvest_label.getText()));
+    }
+
+    private void icon1_buttonActionPerformed(java.awt.event.ActionEvent evt){
+        outputText("Setting values appropriate for dirt block.");
+        material_ComboBox.setSelectedItem("EARTH");
+        hardness_textField.setText("0.5");
+        resistance_textField.setText("0.5");
+        sound_ComboBox.setSelectedItem("GROUND");
+        harvestLevel_textField.setText("0");
+        harvestTool_ComboBox.setSelectedItem("SHOVEL");
+        updateSliders();
+    }
+
+    private void icon2_buttonActionPerformed(java.awt.event.ActionEvent evt){
+        outputText("Setting values appropriate for sand block.");
+        material_ComboBox.setSelectedItem("SAND");
+        hardness_textField.setText("0.5");
+        resistance_textField.setText("0.5");
+        sound_ComboBox.setSelectedItem("SAND");
+        harvestLevel_textField.setText("0");
+        harvestTool_ComboBox.setSelectedItem("SHOVEL");
+        updateSliders();
+    }
+
+    private void icon3_buttonActionPerformed(java.awt.event.ActionEvent evt){
+        outputText("Setting values appropriate for wool block.");
+        material_ComboBox.setSelectedItem("WOOL");
+        hardness_textField.setText("0.8");
+        resistance_textField.setText("0.8");
+        sound_ComboBox.setSelectedItem("CLOTH");
+        harvestLevel_textField.setText("0");
+        harvestTool_ComboBox.setSelectedItem("NONE");
+        updateSliders();
+    }
+
+    private void icon4_buttonActionPerformed(java.awt.event.ActionEvent evt){
+        outputText("Setting values appropriate for stone block.");
+        material_ComboBox.setSelectedItem("ROCK");
+        hardness_textField.setText("1.5");
+        resistance_textField.setText("6.0");
+        sound_ComboBox.setSelectedItem("STONE");
+        harvestLevel_textField.setText("0");
+        harvestTool_ComboBox.setSelectedItem("PICKAXE");
+        updateSliders();
+    }
+
+    private void icon5_buttonActionPerformed(java.awt.event.ActionEvent evt){
+        outputText("Setting values appropriate for gold block.");
+        material_ComboBox.setSelectedItem("IRON");
+        hardness_textField.setText("3.0");
+        resistance_textField.setText("6.0");
+        sound_ComboBox.setSelectedItem("METAL");
+        harvestLevel_textField.setText("1");
+        harvestTool_ComboBox.setSelectedItem("PICKAXE");
+        updateSliders();
+    }
+
+    private void icon6_buttonActionPerformed(java.awt.event.ActionEvent evt){
+        outputText("Setting values appropriate for obsidian block.");
+        material_ComboBox.setSelectedItem("ROCK");
+        hardness_textField.setText("50.0");
+        resistance_textField.setText("1200.0");
+        sound_ComboBox.setSelectedItem("STONE");
+        harvestLevel_textField.setText("3");
+        harvestTool_ComboBox.setSelectedItem("PICKAXE");
+        updateSliders();
+    }
+
+    private void icon7_buttonActionPerformed(java.awt.event.ActionEvent evt){
+        outputText("Setting values appropriate for obsidian block.");
+        material_ComboBox.setSelectedItem("WOOD");
+        hardness_textField.setText("2.0");
+        resistance_textField.setText("2.0");
+        sound_ComboBox.setSelectedItem("WOOD");
+        harvestLevel_textField.setText("0");
+        harvestTool_ComboBox.setSelectedItem("AXE");
+        updateSliders();
+    }
+
+    private void icon8_buttonActionPerformed(java.awt.event.ActionEvent evt){
+        outputText("Setting values appropriate for glass block.");
+        material_ComboBox.setSelectedItem("GLASS");
+        hardness_textField.setText("0.3");
+        resistance_textField.setText("0.3");
+        sound_ComboBox.setSelectedItem("GLASS");
+        harvestLevel_textField.setText("0");
+        harvestTool_ComboBox.setSelectedItem("NONE");
+        updateSliders();
+    }
+
+    private void icon9_buttonActionPerformed(java.awt.event.ActionEvent evt){
+
+    }
+
+    private void icon10_buttonActionPerformed(java.awt.event.ActionEvent evt){
+
+    }
+
+    private void icon11_buttonActionPerformed(java.awt.event.ActionEvent evt){
+
+    }
+
+    private void icon12_buttonActionPerformed(java.awt.event.ActionEvent evt){
+
+    }
+
+    private void icon13_buttonActionPerformed(java.awt.event.ActionEvent evt){
+
+    }
+
+    private void icon14_buttonActionPerformed(java.awt.event.ActionEvent evt){
+
+    }
+
+    private void icon15_buttonActionPerformed(java.awt.event.ActionEvent evt){
+
+    }
+
+    private void icon16_buttonActionPerformed(java.awt.event.ActionEvent evt){
+        outputText("Setting values appropriate for sand block.");
+        material_ComboBox.setSelectedItem("EARTH");
+        hardness_textField.setText("0.5");
+        resistance_textField.setText("0.5");
+        sound_ComboBox.setSelectedItem("GROUND");
+        harvestLevel_textField.setText("0");
+        harvestTool_ComboBox.setSelectedItem("SHOVEL");
+        updateSliders();
+    }
+
     private void skip_buttonActionPerformed(java.awt.event.ActionEvent evt) throws IOException {
         itemAdderTool.update();
         itemAdderTool.skipTextures();
@@ -481,5 +873,11 @@ public class ItemAdderPanel extends JPanel {
         g2.dispose();
 
         return resizedImg;
+    }
+
+    // Appends text to the output text area.
+    public void outputText(String text){
+        output_TextArea.append(text);
+        output_TextArea.append("\n");
     }
 }

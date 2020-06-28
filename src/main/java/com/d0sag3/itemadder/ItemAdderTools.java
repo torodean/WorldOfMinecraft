@@ -96,7 +96,7 @@ public class ItemAdderTools {
 
     // This returns the name of the item in all caps.
     public String getBlockNameCapitalized(){
-        System.out.println("getBlockNameCapitalized returning: " + blockName.toUpperCase());
+        mainPanel.outputText("getBlockNameCapitalized returning: " + blockName.toUpperCase());
         return blockName.toUpperCase();
     }
 
@@ -113,13 +113,13 @@ public class ItemAdderTools {
         }
 
         output = properBlockName.toString().trim();
-        System.out.println("getBlockNameProper returning: " + output);
+        mainPanel.outputText("getBlockNameProper returning: " + output);
         return output;
     }
 
     // This returns the name of the item as shown in Minecraft.
     public String getBlockNameClass(){
-        System.out.println("getBlockNameClass returning: " + getBlockNameProper().replaceAll(" ", ""));
+        mainPanel.outputText("getBlockNameClass returning: " + getBlockNameProper().replaceAll(" ", ""));
         return getBlockNameProper().replaceAll(" ", "");
     }
 
@@ -317,6 +317,7 @@ public class ItemAdderTools {
     }
 
     public void skipTextures() throws IOException {
+        mainPanel.outputText("Moving current files to skipped files.");
         Path path = Paths.get(filePath);
         Files.move(path, Paths.get(mainPanel.skippedDirectory + "\\" + getFileName()));
     }
@@ -326,12 +327,12 @@ public class ItemAdderTools {
         try {
             File myObj = new File(file);
             if (myObj.createNewFile()) {
-                System.out.println("File created: " + myObj.getName());
+                mainPanel.outputText("File created: " + myObj.getName());
             } else {
-                System.out.println("File already exists.");
+                mainPanel.outputText("File already exists.");
             }
         } catch (IOException e) {
-            System.out.println("An error occurred.");
+            mainPanel.outputText("An error occurred.");
             e.printStackTrace();
         }
     }
@@ -342,10 +343,10 @@ public class ItemAdderTools {
             FileWriter myWriter = new FileWriter(file);
             myWriter.write(text);
             myWriter.close();
-            System.out.println("Successfully wrote to the file: " + file);
-            System.out.println("data written: " + text);
+            mainPanel.outputText("Successfully wrote to the file: " + file);
+            mainPanel.outputText("data written: " + text);
         } catch (IOException e) {
-            System.out.println("An error occurred.");
+            mainPanel.outputText("An error occurred.");
             e.printStackTrace();
         }
     }
