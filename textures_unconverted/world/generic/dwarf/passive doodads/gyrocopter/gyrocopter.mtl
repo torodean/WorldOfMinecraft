@@ -1,0 +1,12 @@
+newmtl 197407
+illum 1
+map_Kd ..\..\passivedoodads\gyrocopter\gyrocopter.png
+newmtl 200874
+illum 1
+map_Kd ..\..\..\..\goober\flyingmachine.png
+newmtl 190161
+illum 1
+map_Kd ..\..\..\..\azeroth\stranglethorn\buildings\crashzeppelin\lever.png
+newmtl 190163
+illum 1
+map_Kd ..\..\..\..\azeroth\stranglethorn\buildings\crashzeppelin\meter2.png

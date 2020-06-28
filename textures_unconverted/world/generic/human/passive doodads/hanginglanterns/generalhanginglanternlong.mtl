@@ -1,0 +1,9 @@
+newmtl 197428
+illum 1
+map_Kd ..\..\..\dwarf\passivedoodads\lanterns\hanginglantern01.png
+newmtl 198293
+illum 1
+map_Kd ..\..\passivedoodads\hanginglanterns\lightglass02.png
+newmtl 198784
+illum 1
+map_Kd ..\..\..\nightelf\passivedoodads\magicalimplements\glow.png

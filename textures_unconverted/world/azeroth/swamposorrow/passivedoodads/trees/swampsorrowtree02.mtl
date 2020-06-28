@@ -1,0 +1,6 @@
+newmtl 190374
+illum 1
+map_Kd ..\plants\swampcanopytree01_trunk.png
+newmtl 190417
+illum 1
+map_Kd swampcanopytree03_branch.png

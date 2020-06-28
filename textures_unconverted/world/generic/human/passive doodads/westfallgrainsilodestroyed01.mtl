@@ -1,0 +1,15 @@
+newmtl 198258
+illum 1
+map_Kd ..\passivedoodads\grainsilo05.png
+newmtl 191345
+illum 1
+map_Kd ..\..\..\environment\doodad\westwood\grainsilo\textures\westfallweatheredbarn01skin.png
+newmtl 198663
+illum 1
+map_Kd ..\passivedoodads\westfallbeam01.png
+newmtl 198416
+illum 1
+map_Kd ..\passivedoodads\pulleys\grainsilorag01.png
+newmtl 198259
+illum 1
+map_Kd ..\passivedoodads\grainsilopost02.png

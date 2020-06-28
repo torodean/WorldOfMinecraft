@@ -1,0 +1,6 @@
+newmtl 197645
+illum 1
+map_Kd ..\..\passivedoodads\buckets\tj_gnomemetalbitsb.png
+newmtl 165424
+illum 1
+map_Kd ..\..\..\..\..\particles\gradient64b.png

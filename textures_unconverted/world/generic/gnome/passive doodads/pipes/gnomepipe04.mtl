@@ -1,0 +1,9 @@
+newmtl 129281
+illum 1
+map_Kd ..\..\..\..\..\dungeons\textures\trim\mm_gnome_trim_04.png
+newmtl 189281
+illum 1
+map_Kd ..\..\..\..\azeroth\deadmines\passivedoodads\goblinmeltingpot\dust2.png
+newmtl 127479
+illum 1
+map_Kd ..\..\..\..\..\dungeons\textures\devices\mm_gnome_rings_01.png

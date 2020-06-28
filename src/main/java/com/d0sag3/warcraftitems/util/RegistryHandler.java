@@ -3,7 +3,6 @@ package com.d0sag3.warcraftitems.util;
 // Imports
 import com.d0sag3.warcraftitems.WarcraftItems;
 import com.d0sag3.warcraftitems.blocks.BlockItemBase;
-import com.d0sag3.warcraftitems.blocks.DeepholmMicroCaveBlock;
 import com.d0sag3.warcraftitems.items.ItemBase;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
@@ -25,7 +24,6 @@ public class RegistryHandler {
     public static final RegistryObject<Item> WOWTOKEN_ICON = ITEMS.register("wowtoken_icon", ItemBase::new);
 
     // Blocks
-    public static final RegistryObject<Block> DEEPHOLM_MICRO_CAVE_BLOCK = BLOCKS.register("deepholm_micro_cave_block", DeepholmMicroCaveBlock::new);
 
     // Block Items
     public static final RegistryObject<Item> DEEPHOLM_MICRO_CAVE_BLOCK_ITEM

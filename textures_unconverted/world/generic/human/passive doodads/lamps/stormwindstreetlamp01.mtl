@@ -1,0 +1,6 @@
+newmtl 198317
+illum 1
+map_Kd ..\..\passivedoodads\lamps\streetlamp.png
+newmtl 127516
+illum 1
+map_Kd ..\..\..\..\..\dungeons\textures\doodads\stormwindlampglass.png

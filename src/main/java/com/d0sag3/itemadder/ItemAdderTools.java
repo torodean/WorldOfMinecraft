@@ -2,9 +2,13 @@ package com.d0sag3.itemadder;
 
 //import org.apache.commons.text.WordUtils;
 
+import javax.imageio.ImageIO;
+import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;  // Import the IOException class to handle errors
+import java.io.OutputStream;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -297,23 +301,75 @@ public class ItemAdderTools {
 
     // This will add the code required to add a full block to the list.
     public void AddFullBlock() throws IOException {
-        addBlockClass();
-        addBlockModelFile();
-        addBlockStateFile();
-        addItemModelFile();
-        addLangAddition();
-        addRegistryHandlerText();
-        addRegistryHandlerBlockItemText();
-        addRegistryHandlerImport();
-        addLootTableFile();
+//        addBlockClass();
+//        addBlockModelFile();
+//        addBlockStateFile();
+//        addItemModelFile();
+//        addLangAddition();
+//        addRegistryHandlerText();
+//        addRegistryHandlerBlockItemText();
+//        addRegistryHandlerImport();
+//        addLootTableFile();
         addTextures();
     }
 
-    public void addTextures() throws IOException {
-        Path path = Paths.get(filePath);
-        Files.copy(path, Paths.get(mainPanel.modDirectory + "\\src\\main\\resources\\assets\\warcraftitems\\textures\\blocks\\" + getBlockName() + ".png"));
-        Files.copy(path, Paths.get(mainPanel.modDirectory + "\\src\\main\\resources\\assets\\warcraftitems\\textures\\items\\" + getBlockName() + ".png"));
-        Files.move(path, Paths.get(mainPanel.usedDirectory + "\\" + getFileName()));
+    private BufferedImage getScaledImage(BufferedImage originalImage, int width, int height){
+        BufferedImage scaledImage = new BufferedImage( width, height, originalImage.getType() );
+        Graphics2D graphic2D = scaledImage.createGraphics(); //create a graphics object to paint to
+        graphic2D.setBackground( Color.WHITE );
+        graphic2D.setPaint( Color.WHITE );
+        graphic2D.fillRect( 0, 0, width, height );
+        graphic2D.setRenderingHint( RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR );
+        graphic2D.drawImage( originalImage, 0, 0, width, height, null ); //draw the image scaled
+
+        return scaledImage;
+    }
+
+    public void addTextures() {
+        try{
+            File file = new File(filePath);
+            BufferedImage originalImage = ImageIO.read(file);
+
+            // Creates scaled images.
+            BufferedImage scaledImage256 = getScaledImage(originalImage, 256, 256);
+            BufferedImage scaledImage128 = getScaledImage(originalImage, 128, 128);
+            BufferedImage scaledImage64 = getScaledImage(originalImage, 64, 64);
+            BufferedImage scaledImage32 = getScaledImage(originalImage, 32, 32);
+            BufferedImage scaledImage16 = getScaledImage(originalImage, 16, 16);
+
+            String output_fileName;
+
+            // Copies all hte scaled images to the proper folders.
+            output_fileName = mainPanel.modDirectory + "\\src\\main\\resources\\assets\\warcraftitems\\textures256\\blocks\\" + getBlockName() + ".png";
+            ImageIO.write( scaledImage256, "PNG", new File(output_fileName) ); //write the image to a file
+            output_fileName = mainPanel.modDirectory + "\\src\\main\\resources\\assets\\warcraftitems\\textures128\\blocks\\" + getBlockName() + ".png";
+            ImageIO.write( scaledImage128, "PNG", new File(output_fileName) ); //write the image to a file
+            output_fileName = mainPanel.modDirectory + "\\src\\main\\resources\\assets\\warcraftitems\\textures64\\blocks\\" + getBlockName() + ".png";
+            ImageIO.write( scaledImage64, "PNG", new File(output_fileName) ); //write the image to a file
+            output_fileName = mainPanel.modDirectory + "\\src\\main\\resources\\assets\\warcraftitems\\textures32\\blocks\\" + getBlockName() + ".png";
+            ImageIO.write( scaledImage32, "PNG", new File(output_fileName) ); //write the image to a file
+            output_fileName = mainPanel.modDirectory + "\\src\\main\\resources\\assets\\warcraftitems\\textures16\\blocks\\" + getBlockName() + ".png";
+            ImageIO.write( scaledImage16, "PNG", new File(output_fileName) ); //write the image to a file
+
+            output_fileName = mainPanel.modDirectory + "\\src\\main\\resources\\assets\\warcraftitems\\textures256\\items\\" + getBlockName() + ".png";
+            ImageIO.write( scaledImage256, "PNG", new File(output_fileName) ); //write the image to a file
+            output_fileName = mainPanel.modDirectory + "\\src\\main\\resources\\assets\\warcraftitems\\textures128\\items\\" + getBlockName() + ".png";
+            ImageIO.write( scaledImage128, "PNG", new File(output_fileName) ); //write the image to a file
+            output_fileName = mainPanel.modDirectory + "\\src\\main\\resources\\assets\\warcraftitems\\textures64\\items\\" + getBlockName() + ".png";
+            ImageIO.write( scaledImage64, "PNG", new File(output_fileName) ); //write the image to a file
+            output_fileName = mainPanel.modDirectory + "\\src\\main\\resources\\assets\\warcraftitems\\textures32\\items\\" + getBlockName() + ".png";
+            ImageIO.write( scaledImage32, "PNG", new File(output_fileName) ); //write the image to a file
+            output_fileName = mainPanel.modDirectory + "\\src\\main\\resources\\assets\\warcraftitems\\textures16\\items\\" + getBlockName() + ".png";
+            ImageIO.write( scaledImage16, "PNG", new File(output_fileName) ); //write the image to a file
+
+            // Copies the original size.
+            Path path = Paths.get(filePath);
+            Files.copy(path, Paths.get(mainPanel.modDirectory + "\\src\\main\\resources\\assets\\warcraftitems\\textures\\blocks\\" + getBlockName() + ".png"));
+            Files.copy(path, Paths.get(mainPanel.modDirectory + "\\src\\main\\resources\\assets\\warcraftitems\\textures\\items\\" + getBlockName() + ".png"));
+            Files.move(path, Paths.get(mainPanel.usedDirectory + "\\" + getFileName()));
+        } catch (IOException ie) {
+            mainPanel.outputText(ie.toString());
+        }
     }
 
     public void skipTextures() throws IOException {

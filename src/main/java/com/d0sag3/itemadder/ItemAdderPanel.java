@@ -791,7 +791,7 @@ public class ItemAdderPanel extends JPanel {
     }
 
     private void icon7_buttonActionPerformed(java.awt.event.ActionEvent evt){
-        outputText("Setting values appropriate for obsidian block.");
+        outputText("Setting values appropriate for log block.");
         material_ComboBox.setSelectedItem("WOOD");
         hardness_textField.setText("2.0");
         resistance_textField.setText("2.0");

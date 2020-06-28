@@ -1,0 +1,12 @@
+newmtl 199030
+illum 1
+map_Kd ..\..\passivedoodads\torches\ogretorch03.png
+newmtl 1100044
+illum 1
+map_Kd ..\..\passivedoodads\torches\genericglow_alpha_128.png
+newmtl 1100045
+illum 1
+map_Kd ..\..\passivedoodads\torches\t_vfx_fire_anim_stylized_desat_02.png
+newmtl 1100046
+illum 1
+map_Kd ..\..\passivedoodads\torches\fire_bright_mod2x_a.png

@@ -1,0 +1,6 @@
+newmtl 131942
+illum 1
+map_Kd ..\..\..\..\..\interface\glues\models\ui_human\elwynntreetallcomp_01.png
+newmtl 198585
+illum 1
+map_Kd ..\..\..\..\generic\human\passivedoodads\stormwind\elwynntreetallcanopy_new01.png

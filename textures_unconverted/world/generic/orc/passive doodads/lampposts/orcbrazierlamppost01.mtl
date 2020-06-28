@@ -1,0 +1,9 @@
+newmtl 199133
+illum 1
+map_Kd ..\..\passivedoodads\braziers\orcbraziertex_new01.png
+newmtl 167127
+illum 1
+map_Kd ..\..\..\..\..\spells\toonsmoke16.png
+newmtl 145513
+illum 1
+map_Kd ..\..\..\..\..\item\objectcomponents\weapon\flamelicksmall.png

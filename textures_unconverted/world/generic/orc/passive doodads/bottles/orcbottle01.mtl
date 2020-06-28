@@ -1,0 +1,6 @@
+newmtl 199088
+illum 1
+map_Kd ..\..\passivedoodads\barrelsandcrates\beermug.png
+newmtl 249237
+illum 1
+map_Kd ..\..\..\..\..\item\objectcomponents\shield\armorreflect4.png

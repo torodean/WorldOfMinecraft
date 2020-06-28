@@ -1,0 +1,6 @@
+newmtl 190845
+illum 1
+map_Kd energytraillighter.png
+newmtl 128963
+illum 1
+map_Kd ..\..\..\..\..\dungeons\textures\temp\64.png

@@ -1,0 +1,6 @@
+newmtl 190826
+illum 1
+map_Kd glowball.png
+newmtl 165860
+illum 1
+map_Kd ..\..\..\..\..\spells\cyanstarflash.png

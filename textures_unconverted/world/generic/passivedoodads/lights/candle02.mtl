@@ -1,0 +1,12 @@
+newmtl 531594
+illum 1
+map_Kd ..\..\..\kalimdor\blackfathom\passivedoodads\braziers\flamelicksmallblue.png
+newmtl 645197
+illum 1
+map_Kd candelabratallwall02.png
+newmtl 198784
+illum 1
+map_Kd ..\..\nightelf\passivedoodads\magicalimplements\glow.png
+newmtl 124636
+illum 1
+map_Kd ..\..\..\..\creature\infernal\flame01.png

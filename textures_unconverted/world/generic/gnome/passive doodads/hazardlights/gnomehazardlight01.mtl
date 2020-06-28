@@ -1,0 +1,9 @@
+newmtl 197715
+illum 1
+map_Kd ..\..\passivedoodads\hazardlights\hazardlightstanding.png
+newmtl 197713
+illum 1
+map_Kd ..\..\passivedoodads\hazardlights\hazardlightbeam.png
+newmtl 167217
+illum 1
+map_Kd ..\..\..\..\..\spells\yellow_glow3.png

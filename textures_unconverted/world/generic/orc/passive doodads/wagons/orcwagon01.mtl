@@ -1,0 +1,9 @@
+newmtl 203552
+illum 1
+map_Kd ..\..\..\..\khazmodan\wetlands\passivedoodads\wetlandswagons\wetlandswagon.png
+newmtl 203472
+illum 1
+map_Kd ..\..\..\..\khazmodan\wetlands\passivedoodads\blackrockbanners\wetlandsbonesandeggs.png
+newmtl 199420
+illum 1
+map_Kd ..\..\passivedoodads\wagons\wetlandswagon_new.png

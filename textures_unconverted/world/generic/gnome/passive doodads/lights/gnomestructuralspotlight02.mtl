@@ -1,0 +1,6 @@
+newmtl 197721
+illum 1
+map_Kd ..\..\passivedoodads\lights\tj_gnomespotlight.png
+newmtl 165424
+illum 1
+map_Kd ..\..\..\..\..\particles\gradient64b.png
