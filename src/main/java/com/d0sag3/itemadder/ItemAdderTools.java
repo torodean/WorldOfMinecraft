@@ -18,7 +18,6 @@ import java.util.Scanner;
 public class ItemAdderTools {
 
     private String filePath;
-    private String itemName;
     private String blockName;
     private String fileName;
     ItemAdderPanel mainPanel;
@@ -35,8 +34,9 @@ public class ItemAdderTools {
         filePath = mainPanel.filesToParse.get(mainPanel.currentFileIndex).getAbsolutePath();
         fileName = mainPanel.filesToParse.get(mainPanel.currentFileIndex).getName();
         System.out.println("fileName set to: " + fileName);
+//        mainPanel.outputText("test"); // This causes an error... Not sure why.
 
-        itemName = fileName.substring(0, fileName.length() - 4);
+        String itemName = fileName.substring(0, fileName.length() - 4);
         System.out.println("itemName set to: " + itemName);
 
         blockName = numberlessText(itemName) + "_block";

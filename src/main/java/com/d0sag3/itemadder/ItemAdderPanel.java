@@ -17,6 +17,8 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.text.NumberFormat;
+import java.text.ParseException;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -633,7 +635,6 @@ public class ItemAdderPanel extends JPanel {
     private JScrollPane output_ScrollPane;
 
     // The icons.
-    private JPanel iconPanel;
     private JButton icon1;
     private JButton icon2;
     private JButton icon3;
@@ -682,7 +683,7 @@ public class ItemAdderPanel extends JPanel {
     }
 
     private void hardness_textFieldActionPerformed(java.awt.event.ActionEvent evt) {
-        hardness_slider.setValue(Integer.parseInt(hardness_textField.getText())*10);
+        hardness_slider.setValue((int) (Double.parseDouble(hardness_textField.getText())*10));
     }
 
     private void harvestLevel_sliderChangePerformed(ChangeEvent evt){
@@ -698,7 +699,7 @@ public class ItemAdderPanel extends JPanel {
     }
 
     private void resistance_textFieldActionPerformed(java.awt.event.ActionEvent evt) {
-        resistance_slider.setValue(Integer.parseInt(resistance_textField.getText())*10);
+        resistance_slider.setValue((int) (Double.parseDouble(resistance_textField.getText())*10));
     }
 
     private void harvestLevel_textFieldActionPerformed(java.awt.event.ActionEvent evt) {
@@ -712,10 +713,15 @@ public class ItemAdderPanel extends JPanel {
         displayImage(filesToParse.get(currentFileIndex));
     }
 
+    // Update the values of the sliders to match the textFields.
     private void updateSliders(){
-        hardness_slider.setValue(Integer.parseInt(hardness_label.getText())*10);
-        resistance_slider.setValue(Integer.parseInt(resistance_label.getText())*10);
-        harvestLevel_slider.setValue(Integer.parseInt(harvest_label.getText()));
+        try {
+            hardness_slider.setValue((int) (Double.parseDouble(hardness_textField.getText()) * 10.0));
+            resistance_slider.setValue((int) (Double.parseDouble(resistance_textField.getText()) * 10.0));
+            harvestLevel_slider.setValue(Integer.parseInt(harvestLevel_textField.getText()));
+        } catch (NumberFormatException e) {
+            outputText(e.toString());
+        }
     }
 
     private void icon1_buttonActionPerformed(java.awt.event.ActionEvent evt){
