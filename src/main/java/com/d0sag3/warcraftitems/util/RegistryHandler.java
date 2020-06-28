@@ -1,8 +1,8 @@
 package com.d0sag3.warcraftitems.util;
 
 // Imports
+
 import com.d0sag3.warcraftitems.WarcraftItems;
-import com.d0sag3.warcraftitems.blocks.BlockItemBase;
 import com.d0sag3.warcraftitems.items.ItemBase;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
@@ -12,8 +12,8 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 
 public class RegistryHandler {
-    public static final DeferredRegister<Item> ITEMS = new DeferredRegister<>(ForgeRegistries.ITEMS, WarcraftItems.MOD_ID);
-    public static final DeferredRegister<Block> BLOCKS = new DeferredRegister<>(ForgeRegistries.BLOCKS, WarcraftItems.MOD_ID);
+    public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, WarcraftItems.MOD_ID);
+    public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, WarcraftItems.MOD_ID);
 
     public static void init(){
         ITEMS.register(FMLJavaModLoadingContext.get().getModEventBus());

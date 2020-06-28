@@ -301,15 +301,15 @@ public class ItemAdderTools {
 
     // This will add the code required to add a full block to the list.
     public void AddFullBlock() throws IOException {
-//        addBlockClass();
-//        addBlockModelFile();
-//        addBlockStateFile();
-//        addItemModelFile();
-//        addLangAddition();
-//        addRegistryHandlerText();
-//        addRegistryHandlerBlockItemText();
-//        addRegistryHandlerImport();
-//        addLootTableFile();
+        addBlockClass();
+        addBlockModelFile();
+        addBlockStateFile();
+        addItemModelFile();
+        addLangAddition();
+        addRegistryHandlerText();
+        addRegistryHandlerBlockItemText();
+        addRegistryHandlerImport();
+        addLootTableFile();
         addTextures();
     }
 
