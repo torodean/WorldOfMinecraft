@@ -26,6 +26,4 @@ public class RegistryHandler {
     // Blocks
 
     // Block Items
-    public static final RegistryObject<Item> DEEPHOLM_MICRO_CAVE_BLOCK_ITEM
-            = ITEMS.register("deepholm_micro_cave_block", () -> new BlockItemBase(DEEPHOLM_MICRO_CAVE_BLOCK.get()));
 }
