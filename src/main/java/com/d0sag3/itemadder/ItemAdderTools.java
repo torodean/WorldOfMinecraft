@@ -1,3 +1,10 @@
+/*
+ * File: ItemAdderTools.java
+ * Author: d0sag3 (Antonius Torode)
+ * Created: 6/25/2020
+ * Description: Various tools and methods to work with the ItemAdder GUI elements.
+ */
+
 package com.d0sag3.itemadder;
 
 //import org.apache.commons.text.WordUtils;
@@ -7,8 +14,7 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileWriter;
-import java.io.IOException;  // Import the IOException class to handle errors
-import java.io.OutputStream;
+import java.io.IOException;  // Import the IOException class to handle errors.
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -21,6 +27,7 @@ import java.util.Scanner;
  */
 public class ItemAdderTools {
 
+    private String itemName;
     private String filePath;
     private String blockName;
     private String fileName;
@@ -36,11 +43,11 @@ public class ItemAdderTools {
     // Must be used after each call to AddFullBlock() or skipBlock().
     public void update(){
         filePath = mainPanel.filesToParse.get(mainPanel.currentFileIndex).getAbsolutePath();
-        fileName = mainPanel.filesToParse.get(mainPanel.currentFileIndex).getName();
+        fileName = mainPanel.filesToParse.get(mainPanel.currentFileIndex).getName().replaceAll(" ", "").toLowerCase();
         System.out.println("fileName set to: " + fileName);
 //        mainPanel.outputText("test"); // This causes an error... Not sure why.
 
-        String itemName = fileName.substring(0, fileName.length() - 4);
+        itemName = fileName.substring(0, fileName.length() - 4);
         System.out.println("itemName set to: " + itemName);
 
         blockName = numberlessText(itemName) + "_block";
@@ -233,11 +240,6 @@ public class ItemAdderTools {
         return "    public static final RegistryObject<Block> " + getBlockNameCapitalized() + " = BLOCKS.register(\"" + getBlockName() + "\", " + getBlockNameClass() + "::new);";
     }
 
-    // This is the import to add to the registry handler.
-    public String getRegistryHandlerImport(){
-        return "import com.d0sag3.warcraftitems.blocks." + getBlockNameClass() + ";";
-    }
-
     // This is the block item section to add to the registry handler.
     public String getRegistryHandlerBlockItemText(){
         return "    public static final RegistryObject<Item> " + getBlockNameCapitalized() + "_ITEM" + "\n" +
@@ -254,13 +256,18 @@ public class ItemAdderTools {
         Files.write(path, content.getBytes(charset));
     }
 
+    // This is the import to add to the registry handler.
+    public String getRegistryHandlerPaintingText(){
+        return "    public static RegistryObject<PaintingType> " + numberlessText(itemName).toUpperCase() + " = PAINTING_TYPES.register(\"" + numberlessText(itemName) + "\",()-> new PaintingType(" + mainPanel.paintingWidth + "," + mainPanel.paintingHeight + "));";
+    }
+
     // This will add the appropriate text for the import to the Registry Handler.
-    public void addRegistryHandlerImport() throws IOException {
+    public void addRegistryHandlerPainting() throws IOException {
         Path path = Paths.get(mainPanel.modDirectory + "\\src\\main\\java\\com\\d0sag3\\warcraftitems\\util\\RegistryHandler.java");
         Charset charset = StandardCharsets.UTF_8;
 
         String content = new String(Files.readAllBytes(path), charset);
-        content = content.replaceAll("// Imports", "// Imports\n" + getRegistryHandlerImport());
+        content = content.replaceAll("// Paintings", "// Paintings\n" + getRegistryHandlerPaintingText());
         Files.write(path, content.getBytes(charset));
     }
 
@@ -299,8 +306,39 @@ public class ItemAdderTools {
         writeToFile(lootTableFile, getLootTableText());
     }
 
+    public void addPainting(int width, int height) throws IOException {
+        addRegistryHandlerPainting();
+        File file = new File(filePath);
+        BufferedImage originalImage = ImageIO.read(file);
+
+        // Creates scaled images.
+        BufferedImage scaledImage256 = getScaledImage(originalImage, width*16, height*16);
+        BufferedImage scaledImage128 = getScaledImage(originalImage, width*8, height*8);
+        BufferedImage scaledImage64 = getScaledImage(originalImage, width*4, height*4);
+        BufferedImage scaledImage32 = getScaledImage(originalImage, width*2, height*2);
+        BufferedImage scaledImage16 = getScaledImage(originalImage, width, height);
+
+        String output_fileName;
+
+        output_fileName = mainPanel.modDirectory + "\\src\\main\\resources\\assets\\warcraftitems\\textures256\\painting\\" + numberlessText(itemName) + ".png";
+        ImageIO.write( scaledImage256, "PNG", new File(output_fileName) ); //write the image to a file
+        output_fileName = mainPanel.modDirectory + "\\src\\main\\resources\\assets\\warcraftitems\\textures128\\painting\\" + numberlessText(itemName) + ".png";
+        ImageIO.write( scaledImage128, "PNG", new File(output_fileName) ); //write the image to a file
+        output_fileName = mainPanel.modDirectory + "\\src\\main\\resources\\assets\\warcraftitems\\textures64\\painting\\" + numberlessText(itemName) + ".png";
+        ImageIO.write( scaledImage64, "PNG", new File(output_fileName) ); //write the image to a file
+        output_fileName = mainPanel.modDirectory + "\\src\\main\\resources\\assets\\warcraftitems\\textures32\\painting\\" + numberlessText(itemName) + ".png";
+        ImageIO.write( scaledImage32, "PNG", new File(output_fileName) ); //write the image to a file
+        output_fileName = mainPanel.modDirectory + "\\src\\main\\resources\\assets\\warcraftitems\\textures16\\painting\\" + numberlessText(itemName) + ".png";
+        ImageIO.write( scaledImage16, "PNG", new File(output_fileName) ); //write the image to a file
+
+        // Copies the original size.
+        Path path = Paths.get(filePath);
+        Files.copy(Paths.get(mainPanel.modDirectory + "\\src\\main\\resources\\assets\\warcraftitems\\textures256\\painting\\" + numberlessText(itemName) + ".png"), Paths.get(mainPanel.modDirectory + "\\src\\main\\resources\\assets\\warcraftitems\\textures\\painting\\" + numberlessText(itemName) + ".png"));
+        Files.move(path, Paths.get(mainPanel.usedDirectory + "\\" + getFileName()));
+    }
+
     // This will add the code required to add a full block to the list.
-    public void AddFullBlock() throws IOException {
+    public void addFullBlock() throws IOException {
         addBlockClass();
         addBlockModelFile();
         addBlockStateFile();
@@ -308,7 +346,6 @@ public class ItemAdderTools {
         addLangAddition();
         addRegistryHandlerText();
         addRegistryHandlerBlockItemText();
-        addRegistryHandlerImport();
         addLootTableFile();
         addTextures();
     }

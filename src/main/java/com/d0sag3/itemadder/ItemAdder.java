@@ -1,5 +1,5 @@
 /*
- * File: ItemAdderGUI.java
+ * File: ItemAdder.java
  * Author: d0sag3 (Antonius Torode)
  * Created: 6/25/2020
  * Description: The Item Adder assist in automation of creating the warcraftitems mod.

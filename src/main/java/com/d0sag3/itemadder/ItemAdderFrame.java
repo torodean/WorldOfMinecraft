@@ -1,3 +1,10 @@
+/*
+ * File: ItemAdderFrame.java
+ * Author: d0sag3 (Antonius Torode)
+ * Created: 6/25/2020
+ * Description: The Item Adder gui to display. This is a frame that houses the ItemAdderPanel.
+ */
+
 package com.d0sag3.itemadder;
 
 import java.io.IOException;
