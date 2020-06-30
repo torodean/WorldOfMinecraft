@@ -24,6 +24,11 @@ public class RegistryHandler {
     }
 
     // Paintings
+    public static RegistryObject<PaintingType> WORGONPAINTING = PAINTING_TYPES.register("worgonpainting",()-> new PaintingType(64,48));
+    public static RegistryObject<PaintingType> RAGNAROSPAINTING = PAINTING_TYPES.register("ragnarospainting",()-> new PaintingType(64,32));
+    public static RegistryObject<PaintingType> NIGHTELFPAINTING = PAINTING_TYPES.register("nightelfpainting",()-> new PaintingType(16,16));
+    public static RegistryObject<PaintingType> DEATHWINGPAINTING = PAINTING_TYPES.register("deathwingpainting",()-> new PaintingType(64,32));
+    public static RegistryObject<PaintingType> BOOTYBAYPAINTING = PAINTING_TYPES.register("bootybaypainting",()-> new PaintingType(32,16));
     public static RegistryObject<PaintingType> SIXAK_ARAKKOA_BACKGROUND = PAINTING_TYPES.register("sixak_arakkoa_background",()-> new PaintingType(32,32));
     public static RegistryObject<PaintingType> MAGETHETWOXTHETWO = PAINTING_TYPES.register("magethetwoxthetwo",()-> new PaintingType(64,64));
     public static RegistryObject<PaintingType> LKPAINTING = PAINTING_TYPES.register("lkpainting",()-> new PaintingType(64,48));
@@ -43,6 +48,21 @@ public class RegistryHandler {
     public static final RegistryObject<Item> WOWTOKEN_ICON = ITEMS.register("wowtoken_icon", ItemBase::new);
 
     // Blocks
+    public static final RegistryObject<Block> SEVNE_DRUID_COLUMNZERTWO_BLOCK = BLOCKS.register("sevne_druid_columnzertwo_block", SevneDruidColumnzertwoBlock::new);
+    public static final RegistryObject<Block> SEVNE_DRUID_COLUMNZERONE_BLOCK = BLOCKS.register("sevne_druid_columnzerone_block", SevneDruidColumnzeroneBlock::new);
+    public static final RegistryObject<Block> SEVNE_DRUID_CEILINGZERONE_BLOCK = BLOCKS.register("sevne_druid_ceilingzerone_block", SevneDruidCeilingzeroneBlock::new);
+    public static final RegistryObject<Block> DARKPORTAL_TRIM_NEWZERONE_RED_BLOCK = BLOCKS.register("darkportal_trim_newzerone_red_block", DarkportalTrimNewzeroneRedBlock::new);
+    public static final RegistryObject<Block> DARKPORTAL_TRIM_NEWZERONE_NOCOLOR_BLOCK = BLOCKS.register("darkportal_trim_newzerone_nocolor_block", DarkportalTrimNewzeroneNocolorBlock::new);
 
     // Block Items
+    public static final RegistryObject<Item> SEVNE_DRUID_COLUMNZERTWO_BLOCK_ITEM
+            = ITEMS.register("sevne_druid_columnzertwo_block", () -> new BlockItemBase(SEVNE_DRUID_COLUMNZERTWO_BLOCK.get()));
+    public static final RegistryObject<Item> SEVNE_DRUID_COLUMNZERONE_BLOCK_ITEM
+            = ITEMS.register("sevne_druid_columnzerone_block", () -> new BlockItemBase(SEVNE_DRUID_COLUMNZERONE_BLOCK.get()));
+    public static final RegistryObject<Item> SEVNE_DRUID_CEILINGZERONE_BLOCK_ITEM
+            = ITEMS.register("sevne_druid_ceilingzerone_block", () -> new BlockItemBase(SEVNE_DRUID_CEILINGZERONE_BLOCK.get()));
+    public static final RegistryObject<Item> DARKPORTAL_TRIM_NEWZERONE_RED_BLOCK_ITEM
+            = ITEMS.register("darkportal_trim_newzerone_red_block", () -> new BlockItemBase(DARKPORTAL_TRIM_NEWZERONE_RED_BLOCK.get()));
+    public static final RegistryObject<Item> DARKPORTAL_TRIM_NEWZERONE_NOCOLOR_BLOCK_ITEM
+            = ITEMS.register("darkportal_trim_newzerone_nocolor_block", () -> new BlockItemBase(DARKPORTAL_TRIM_NEWZERONE_NOCOLOR_BLOCK.get()));
 }

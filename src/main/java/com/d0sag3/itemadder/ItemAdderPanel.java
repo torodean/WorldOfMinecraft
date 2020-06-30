@@ -415,9 +415,10 @@ public class ItemAdderPanel extends JPanel {
                                                         .addComponent(modDirectory_textField)
                                                         .addComponent(skippedDirectory_textField)))
                                         .addGroup(layout.createSequentialGroup()
-                                                .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
+                                                .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                                                        .addComponent(imagePanel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                                                         .addGroup(layout.createSequentialGroup()
-                                                                .addComponent(generateCode_button)
+                                                                .addComponent(generateCode_button, GroupLayout.PREFERRED_SIZE, 95, GroupLayout.PREFERRED_SIZE)
                                                                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                                                                 .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
                                                                         .addComponent(skip_button, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -425,8 +426,7 @@ public class ItemAdderPanel extends JPanel {
                                                                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                                                                 .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
                                                                         .addComponent(painting_size, 0, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                                        .addComponent(painting_button, GroupLayout.DEFAULT_SIZE, 86, Short.MAX_VALUE)))
-                                                        .addComponent(imagePanel, GroupLayout.DEFAULT_SIZE, 256, Short.MAX_VALUE))
+                                                                        .addComponent(painting_button, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                                                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                                                 .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
                                                         .addGroup(layout.createSequentialGroup()
@@ -486,7 +486,7 @@ public class ItemAdderPanel extends JPanel {
                                                                                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                                                                                 .addComponent(harvestLevel_slider, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                                                         .addComponent(harvestTool_ComboBox, 0, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                                                .addGap(0, 0, Short.MAX_VALUE))
+                                                .addGap(12, 12, 12))
                                         .addGroup(layout.createSequentialGroup()
                                                 .addComponent(currentImage_label)
                                                 .addGap(18, 18, 18)
@@ -561,7 +561,7 @@ public class ItemAdderPanel extends JPanel {
                                                 .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
                                                         .addGroup(layout.createSequentialGroup()
                                                                 .addComponent(icon1, GroupLayout.PREFERRED_SIZE, 40, GroupLayout.PREFERRED_SIZE)
-                                                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
                                                                 .addComponent(icon9, GroupLayout.PREFERRED_SIZE, 40, GroupLayout.PREFERRED_SIZE))
                                                         .addGroup(layout.createSequentialGroup()
                                                                 .addComponent(icon2, GroupLayout.PREFERRED_SIZE, 40, GroupLayout.PREFERRED_SIZE)
@@ -595,8 +595,8 @@ public class ItemAdderPanel extends JPanel {
                                 .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
                                         .addComponent(painting_size, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                                         .addComponent(erase_button))
-                                .addGap(4, 4, 4)
-                                .addComponent(output_ScrollPane, GroupLayout.PREFERRED_SIZE, 216, GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(output_ScrollPane, GroupLayout.PREFERRED_SIZE, 220, GroupLayout.PREFERRED_SIZE)
                                 .addContainerGap())
         );
     }
@@ -905,7 +905,7 @@ public class ItemAdderPanel extends JPanel {
         resistance_textField.setText("0.2");
         sound_ComboBox.setSelectedItem("PLANT");
         harvestLevel_textField.setText("0");
-        harvestTool_ComboBox.setSelectedItem("HOE");
+        harvestTool_ComboBox.setSelectedItem("NONE");
         updateSliders();
     }
 
