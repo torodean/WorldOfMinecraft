@@ -930,14 +930,7 @@ public class ItemAdderPanel extends JPanel {
     }
 
     private void icon16_buttonActionPerformed(java.awt.event.ActionEvent evt){
-        outputText("Setting values appropriate for sand block.");
-        material_ComboBox.setSelectedItem("EARTH");
-        hardness_textField.setText("0.5");
-        resistance_textField.setText("0.5");
-        sound_ComboBox.setSelectedItem("GROUND");
-        harvestLevel_textField.setText("0");
-        harvestTool_ComboBox.setSelectedItem("SHOVEL");
-        updateSliders();
+
     }
 
     private void skip_buttonActionPerformed(java.awt.event.ActionEvent evt) throws IOException {
