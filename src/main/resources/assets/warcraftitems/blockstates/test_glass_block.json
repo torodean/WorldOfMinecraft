@@ -1,0 +1,5 @@
+{
+  "variants": {
+    "": { "model":  "warcraftitems:block/test_glass_block" }
+  }
+}

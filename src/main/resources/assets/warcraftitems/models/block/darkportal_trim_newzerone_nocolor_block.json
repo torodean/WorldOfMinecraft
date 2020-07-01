@@ -1,6 +1,0 @@
-{
-  "parent": "block/cube_all",
-  "textures": {
-    "all": "warcraftitems:blocks/darkportal_trim_newzerone_nocolor_block"
-  }
-}

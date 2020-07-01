@@ -1,9 +1,5 @@
 {
-  "item.warcraftitems.wowtoken_icon": "WoW Token",
   "itemGroup.wow_items": "WoW Items",
-  "block.warcraftitems.darkportal_trim_newzerone_nocolor_block": "Darkportal Trim Newzerone Nocolor Block",
-  "block.warcraftitems.darkportal_trim_newzerone_red_block": "Darkportal Trim Newzerone Red Block",
-  "block.warcraftitems.sevne_druid_ceilingzerone_block": "Sevne Druid Ceilingzerone Block",
-  "block.warcraftitems.sevne_druid_columnzerone_block": "Sevne Druid Columnzerone Block",
-  "block.warcraftitems.sevne_druid_columnzertwo_block": "Sevne Druid Columnzertwo Block"
+  "item.warcraftitems.wowtoken_icon": "WoW Token",
+  "block.warcraftitems.test_glass_block": "Test Glass Block"
 }

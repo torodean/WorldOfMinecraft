@@ -364,40 +364,41 @@ public class ItemAdderTools {
 
     public void addTextures() {
         try{
-            File file = new File(filePath);
-            BufferedImage originalImage = ImageIO.read(file);
-
-            // Creates scaled images.
-            BufferedImage scaledImage256 = getScaledImage(originalImage, 256, 256);
-            BufferedImage scaledImage128 = getScaledImage(originalImage, 128, 128);
-            BufferedImage scaledImage64 = getScaledImage(originalImage, 64, 64);
-            BufferedImage scaledImage32 = getScaledImage(originalImage, 32, 32);
-            BufferedImage scaledImage16 = getScaledImage(originalImage, 16, 16);
-
-            String output_fileName;
-
-            // Copies all hte scaled images to the proper folders.
-            output_fileName = mainPanel.modDirectory + "\\src\\main\\resources\\assets\\warcraftitems\\textures256\\blocks\\" + getBlockName() + ".png";
-            ImageIO.write( scaledImage256, "PNG", new File(output_fileName) ); //write the image to a file
-            output_fileName = mainPanel.modDirectory + "\\src\\main\\resources\\assets\\warcraftitems\\textures128\\blocks\\" + getBlockName() + ".png";
-            ImageIO.write( scaledImage128, "PNG", new File(output_fileName) ); //write the image to a file
-            output_fileName = mainPanel.modDirectory + "\\src\\main\\resources\\assets\\warcraftitems\\textures64\\blocks\\" + getBlockName() + ".png";
-            ImageIO.write( scaledImage64, "PNG", new File(output_fileName) ); //write the image to a file
-            output_fileName = mainPanel.modDirectory + "\\src\\main\\resources\\assets\\warcraftitems\\textures32\\blocks\\" + getBlockName() + ".png";
-            ImageIO.write( scaledImage32, "PNG", new File(output_fileName) ); //write the image to a file
-            output_fileName = mainPanel.modDirectory + "\\src\\main\\resources\\assets\\warcraftitems\\textures16\\blocks\\" + getBlockName() + ".png";
-            ImageIO.write( scaledImage16, "PNG", new File(output_fileName) ); //write the image to a file
-
-            output_fileName = mainPanel.modDirectory + "\\src\\main\\resources\\assets\\warcraftitems\\textures256\\items\\" + getBlockName() + ".png";
-            ImageIO.write( scaledImage256, "PNG", new File(output_fileName) ); //write the image to a file
-            output_fileName = mainPanel.modDirectory + "\\src\\main\\resources\\assets\\warcraftitems\\textures128\\items\\" + getBlockName() + ".png";
-            ImageIO.write( scaledImage128, "PNG", new File(output_fileName) ); //write the image to a file
-            output_fileName = mainPanel.modDirectory + "\\src\\main\\resources\\assets\\warcraftitems\\textures64\\items\\" + getBlockName() + ".png";
-            ImageIO.write( scaledImage64, "PNG", new File(output_fileName) ); //write the image to a file
-            output_fileName = mainPanel.modDirectory + "\\src\\main\\resources\\assets\\warcraftitems\\textures32\\items\\" + getBlockName() + ".png";
-            ImageIO.write( scaledImage32, "PNG", new File(output_fileName) ); //write the image to a file
-            output_fileName = mainPanel.modDirectory + "\\src\\main\\resources\\assets\\warcraftitems\\textures16\\items\\" + getBlockName() + ".png";
-            ImageIO.write( scaledImage16, "PNG", new File(output_fileName) ); //write the image to a file
+            // TODO - THIS IS ALL PRODUCTION CODE. CURRENTLY COMMENTED OUT TO MAKE TESTING EASIER.
+//            File file = new File(filePath);
+//            BufferedImage originalImage = ImageIO.read(file);
+//
+//            // Creates scaled images.
+//            BufferedImage scaledImage256 = getScaledImage(originalImage, 256, 256);
+//            BufferedImage scaledImage128 = getScaledImage(originalImage, 128, 128);
+//            BufferedImage scaledImage64 = getScaledImage(originalImage, 64, 64);
+//            BufferedImage scaledImage32 = getScaledImage(originalImage, 32, 32);
+//            BufferedImage scaledImage16 = getScaledImage(originalImage, 16, 16);
+//
+//            String output_fileName;
+//
+//            // Copies all the scaled images to the proper folders.
+//            output_fileName = mainPanel.modDirectory + "\\src\\main\\resources\\assets\\warcraftitems\\textures256\\blocks\\" + getBlockName() + ".png";
+//            ImageIO.write( scaledImage256, "PNG", new File(output_fileName) ); //write the image to a file
+//            output_fileName = mainPanel.modDirectory + "\\src\\main\\resources\\assets\\warcraftitems\\textures128\\blocks\\" + getBlockName() + ".png";
+//            ImageIO.write( scaledImage128, "PNG", new File(output_fileName) ); //write the image to a file
+//            output_fileName = mainPanel.modDirectory + "\\src\\main\\resources\\assets\\warcraftitems\\textures64\\blocks\\" + getBlockName() + ".png";
+//            ImageIO.write( scaledImage64, "PNG", new File(output_fileName) ); //write the image to a file
+//            output_fileName = mainPanel.modDirectory + "\\src\\main\\resources\\assets\\warcraftitems\\textures32\\blocks\\" + getBlockName() + ".png";
+//            ImageIO.write( scaledImage32, "PNG", new File(output_fileName) ); //write the image to a file
+//            output_fileName = mainPanel.modDirectory + "\\src\\main\\resources\\assets\\warcraftitems\\textures16\\blocks\\" + getBlockName() + ".png";
+//            ImageIO.write( scaledImage16, "PNG", new File(output_fileName) ); //write the image to a file
+//
+//            output_fileName = mainPanel.modDirectory + "\\src\\main\\resources\\assets\\warcraftitems\\textures256\\items\\" + getBlockName() + ".png";
+//            ImageIO.write( scaledImage256, "PNG", new File(output_fileName) ); //write the image to a file
+//            output_fileName = mainPanel.modDirectory + "\\src\\main\\resources\\assets\\warcraftitems\\textures128\\items\\" + getBlockName() + ".png";
+//            ImageIO.write( scaledImage128, "PNG", new File(output_fileName) ); //write the image to a file
+//            output_fileName = mainPanel.modDirectory + "\\src\\main\\resources\\assets\\warcraftitems\\textures64\\items\\" + getBlockName() + ".png";
+//            ImageIO.write( scaledImage64, "PNG", new File(output_fileName) ); //write the image to a file
+//            output_fileName = mainPanel.modDirectory + "\\src\\main\\resources\\assets\\warcraftitems\\textures32\\items\\" + getBlockName() + ".png";
+//            ImageIO.write( scaledImage32, "PNG", new File(output_fileName) ); //write the image to a file
+//            output_fileName = mainPanel.modDirectory + "\\src\\main\\resources\\assets\\warcraftitems\\textures16\\items\\" + getBlockName() + ".png";
+//            ImageIO.write( scaledImage16, "PNG", new File(output_fileName) ); //write the image to a file
 
             // Copies the original size.
             Path path = Paths.get(filePath);

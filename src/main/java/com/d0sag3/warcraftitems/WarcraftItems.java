@@ -1,7 +1,11 @@
 package com.d0sag3.warcraftitems;
 
+import com.d0sag3.warcraftitems.blocks.TestGlassBlock;
 import com.d0sag3.warcraftitems.util.RegistryHandler;
 import net.minecraft.block.Blocks;
+import net.minecraft.client.renderer.RenderState;
+import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.RenderTypeLookup;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.MinecraftForge;
@@ -45,6 +49,16 @@ public class WarcraftItems
     private void doClientStuff(final FMLClientSetupEvent event) {
         // do something that can only be done on the client
         LOGGER.info("Got game settings {}", event.getMinecraftSupplier().get().gameSettings);
+
+        // Testing transparent blocks.
+        // RenderType.func_239273_n_() = completely transparent.
+        // RenderType::func_230041_s_ = No. (antiblock?)
+        // RenderType.func_239270_k_() No.
+        // RenderType.func_241715_r_() Almost yes.
+        // RenderType.func_239269_g_() no
+        // RenderType.func_239271_l_() No.
+        // RenderType.func_239274_p_() No
+//        RenderTypeLookup.setRenderLayer(RegistryHandler.TEST_GLASS_BLOCK.get(), RenderType.func_241715_r_());
     }
 
     public static final ItemGroup WOW_ITEMS = new ItemGroup("wow_items"){

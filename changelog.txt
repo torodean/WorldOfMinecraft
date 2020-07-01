@@ -1,3 +1,75 @@
+Build: 1.16.1-32.0.38 - Tue Jun 30 20:19:32 GMT 2020
+	info:
+		Add hoe tool type (#6872)
+
+	ichttt:
+		Fix loading screen color and text (#6824)
+
+=========
+Build: 1.16.1-32.0.36 - Tue Jun 30 20:09:21 GMT 2020
+	curle:
+		Allow any armor to have custom knockback resistance (#6877)
+
+=========
+Build: 1.16.1-32.0.35 - Tue Jun 30 19:57:32 GMT 2020
+	diesieben07:
+		Add senderUUID to ClientChatReceivedEvent (#6881)
+
+=========
+Build: 1.16.1-32.0.34 - Tue Jun 30 02:33:58 GMT 2020
+	lex:
+		Re-write checkATs function and automate making Items/Blocks public.
+
+=========
+Build: 1.16.1-32.0.33 - Tue Jun 30 02:10:14 GMT 2020
+	cpw:
+		Reorganize modloading on the dediserver. This removes the DedicatedServer parameter from the FMLDedicatedServerSetupEvent.
+		Code for customizing the server instance should be moved to the ServerAboutToStartEvent or similar, where the server instance
+		is available.
+		
+		This reorganization means that mods will load fully before the server is even constructed, or the server properties loaded. We also move the EULA right to the front so we don't have to wait for bootstrap.
+		
+		This should fix the problems with mods which customize world data and other things.
+		
+		Signed-off-by: cpw <cpw+github@weeksfamily.ca>
+
+=========
+Build: 1.16.1-32.0.32 - Mon Jun 29 23:43:01 GMT 2020
+	thpetuaudletang:
+		Fix datagen resolving tags and exploding. (#6865)
+
+=========
+Build: 1.16.1-32.0.31 - Mon Jun 29 23:37:30 GMT 2020
+	mattmess1221:
+		Fix Language.javaLocale parsing (#6862)
+
+=========
+Build: 1.16.1-32.0.30 - Mon Jun 29 22:58:30 GMT 2020
+	diesieben07:
+		Fix IItemHandler wrappers for chests not updating both chests (#6875)
+
+=========
+Build: 1.16.1-32.0.29 - Mon Jun 29 21:08:55 GMT 2020
+	lex:
+		Fix missed patch in PlayerList and EntitySelectioonContext. Closes #6846 Closes #6850
+
+=========
+Build: 1.16.1-32.0.27 - Mon Jun 29 20:09:12 GMT 2020
+	richard:
+		Fix access levels being hardcoded to private via patch overriding AT entry (#6848)
+
+=========
+Build: 1.16.1-32.0.26 - Mon Jun 29 19:42:50 GMT 2020
+	lex:
+		Fix tag related issues when connecting to a vanilla server.
+
+=========
+Build: 1.16.1-32.0.25 - Sun Jun 28 22:08:15 GMT 2020
+	lex:
+		Fix Forge's internal handler being registered in wrong place.
+		Fix double call to loader end.
+
+=========
 Build: 1.16.1-32.0.24 - Sat Jun 27 22:50:54 GMT 2020
 	David Quintana:
 		Add a model loader that lets mods specify different models for different perspectives.

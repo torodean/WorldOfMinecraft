@@ -1,6 +1,0 @@
-{
-  "parent": "block/cube_all",
-  "textures": {
-    "all": "warcraftitems:blocks/sevne_druid_columnzertwo_block"
-  }
-}

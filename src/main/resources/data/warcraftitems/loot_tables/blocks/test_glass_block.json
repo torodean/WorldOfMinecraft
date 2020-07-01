@@ -6,7 +6,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "warcraftitems:darkportal_trim_newzerone_nocolor_block"
+          "name": "warcraftitems:test_glass_block"
         }
       ]
     }
